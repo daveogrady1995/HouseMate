@@ -39,8 +39,7 @@ export const firebaseConfig = {
   providers: [
     AuthService,
     AngularFireAuth,
-    AngularFireDatabase,
-    AngularFirestoreModule
+    AngularFireDatabase
   ],
   bootstrap: [AppComponent]
 })
