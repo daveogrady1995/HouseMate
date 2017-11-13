@@ -3,22 +3,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
 const app = express();
-//const passport = require('passport');
-// const mongoose = require('mongoose');
-// const config = require('./config/database');
-
-// Connect To Database
-//  mongoose.createConnection(config.database, {
-//   useMongoClient: true
-// });
-
-// mongoose.connection.on('connected', () => {
-//     console.log('Connected to database ' +config.database);
-// });
-
-// mongoose.connection.on('error', (err) => {
-//     console.log('Database Error ' +err);
-// });
 
 // API file for interacting with MongoDB
 const api = require('./server/routes/api');
