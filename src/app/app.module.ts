@@ -1,16 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AuthService } from './core/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { UserFormComponent } from './user-form/user-form.component';
 import { FormsModule } from '@angular/forms';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+// Core
+import { CoreModule } from './core/core.module';
 
 
 export const firebaseConfig = {
@@ -27,19 +30,14 @@ export const firebaseConfig = {
     AppComponent,
     UserProfileComponent,
     UserLoginComponent,
-    UserFormComponent
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
-  ],
-  providers: [
-    AuthService,
-    AngularFireAuth,
-    AngularFireDatabase
+    CoreModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [AppComponent]
 })
