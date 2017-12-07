@@ -1,4 +1,4 @@
-<div *ngIf="!(auth.user | async); else alreadyLoggedIn">
+<!-- <div *ngIf="!(auth.user | async); else alreadyLoggedIn">
 
   <h3>Social Login</h3>
 
@@ -19,21 +19,19 @@
         <i class="fa fa-user-secret fa-lg"></i> Connect Anonymously
       </button>
 
-    <hr>
+    <hr> -->
 
 
      <!-- <user-form></user-form>  -->
 
-</div>
+<!-- </div> -->
 
 
-
-
-<ng-template #alreadyLoggedIn>
+<!-- <ng-template #alreadyLoggedIn>
   <p class="text-success">
     Already logged in!
   </p>
-</ng-template>
+</ng-template> -->
 
 <!-- <div class="form-container">
   <img src="assets/images/lock.svg" id="lock">
@@ -46,3 +44,16 @@
 
   <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
 </div> -->
+
+<div *ngIf="!(auth.user | async); else alreadyLoggedIn">
+  <div class="form-signin text-center">
+    <h2 class="form-signin-heading">Please sign in to continue</h2>
+    <button (click)="signInWithFacebook()" class="btn btn-lg btn-primary" type="submit"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i> Sign in with Facebook</button>
+  </div>
+</div>
+
+<ng-template #alreadyLoggedIn>
+  <p class="text-success">
+    Already logged in!
+  </p>
+</ng-template>

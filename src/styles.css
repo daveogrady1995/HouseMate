@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Move down content because we have a fixed navbar that is 50px tall */
-body {
-  padding-top: 2rem;
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+ body {
+  padding-top: 3.5rem;
+  background: lightgray;
+} 
+
+.mat-radio-button ~ .mat-radio-button {
+  padding-right: 16px;
 }
+

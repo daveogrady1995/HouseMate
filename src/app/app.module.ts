@@ -7,13 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserFormComponent } from './user-form/user-form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 // Core
 import { CoreModule } from './core/core.module';
+import { UserPreferencesComponent } from './user-preferences/user-preferences.component';
 
 
 export const firebaseConfig = {
@@ -31,11 +32,13 @@ export const firebaseConfig = {
     UserProfileComponent,
     UserLoginComponent,
     UserFormComponent,
+    UserPreferencesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     CoreModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],

@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 
+interface User {
+  uid: string;
+  email?: string;
+  photoURL?: string;
+  displayName?: string;
+}
+
 @Component({
   selector: 'user-profile',
   templateUrl: './user-profile.component.html',
@@ -8,10 +15,12 @@ import { AuthService } from '../core/auth.service';
 })
 export class UserProfileComponent implements OnInit {
 
+  loggedInUser:User;
 
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
+    //this.auth.user.subscribe()
   }
 
   logout() {

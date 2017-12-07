@@ -1,23 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../core/auth.service";
 import { Router } from "@angular/router";
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent {
+
+  private userID;
 
   constructor(public auth: AuthService,
+              private afAuth: AngularFireAuth,
               private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() {  
+    // make sure current user id is available
+    this.afAuth.authState.subscribe(auth => {
+      if (auth) {
+        this.userID = auth.uid;
+      }
+    })
   }
 
   private afterSignIn(): void {
     // Do after login stuff here, such router redirects, toast messages, etc.
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/preferences']);
   }
 
   signInWithGoogle(): void {
@@ -34,6 +45,10 @@ export class UserLoginComponent implements OnInit {
   signInAnonymously() {
     this.auth.anonymousLogin()
       .then(() => this.afterSignIn());
+  }
+
+   logout() {
+    this.auth.signOut();
   }
 
 }
