@@ -1,11 +1,85 @@
-<h2>House Mate Preferences</h2>
 <br/>
-<form [formGroup]="userPrefForm" (ngSubmit)="submitPreferences()">
-  <fieldset>
-    <!-- <div class="form-group">
+<div class="row justify-content-md-center">
+  <div class="col-md-auto">
+    <div class="card border-info">
+      <div class="card-header">
+        Who would you like to move in with?
+      </div>
+      <div class="card-body">
+        <form [formGroup]="userPrefForm" (ngSubmit)="submitPreferences()">
+          <fieldset>
+            <div class="form-group">
+              <label for="smoker">Occupation</label>
+              <br>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> Working Professional
+              </label>
+                <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option2" autocomplete="off"> Student
+              </label>
+                <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option3" autocomplete="off"> Don't Mind
+              </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="smoker">Smoker</label>
+              <br>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Yes
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option2" autocomplete="off"> No
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option3" autocomplete="off"> Don't Mind
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="smoker">Lifestyle</label>
+              <br>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked> Night Owl
+            </label>
+                <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option2" autocomplete="off"> Early Bird
+            </label>
+                <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option3" autocomplete="off"> Don't Mind
+            </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="smoker">Boozer</label>
+              <br>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked> Yes
+            </label>
+                <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option2" autocomplete="off"> No
+            </label>
+                <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option3" autocomplete="off"> Don't Mind
+            </label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="form-group">
       <label for="disabledTextInput">Occupation</label>
       <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
-    </div> -->
+    </div> 
     <div class="form-group">
       <label for="occupation">Occupation:</label>
       <select id="occupation" class="form-control" formControlName="occupation">
@@ -39,11 +113,8 @@
       <label for="disabledTextInput">Other details:</label>
       <textarea formControlName="otherDetails" id="otherDetails" class="form-control"></textarea>
     </div>
-    <!-- <div class="form-check">
+     <div class="form-check">
       <label class="form-check-label">
         <input class="form-check-input" type="checkbox"> Can't check this
       </label>
-    </div> -->
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </fieldset>
-</form>
+    </div>  -->

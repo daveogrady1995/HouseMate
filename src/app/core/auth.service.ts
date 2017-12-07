@@ -21,7 +21,7 @@ export class AuthService {
 
   private user: Observable<User>;
 
-  constructor(private afAuth: AngularFireAuth,
+  constructor(public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router) {
 
