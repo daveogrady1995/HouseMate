@@ -15,8 +15,6 @@ interface User {
 })
 export class UserProfileComponent implements OnInit {
 
-  loggedInUser:User;
-
   constructor(public auth: AuthService) { }
 
   ngOnInit() {

@@ -18,20 +18,9 @@ interface User {
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
-
-  private user:User
+export class AppComponent {
 
   constructor(public auth: AuthService) { }
-
-  ngOnInit() {  
-    // retrieve logged in user info
-    this.auth.afAuth.authState.subscribe(auth => {
-      if (auth) {
-        this.user.displayName = auth.displayName;
-      }
-    })
-  }
 
   logout() {
     this.auth.signOut();
