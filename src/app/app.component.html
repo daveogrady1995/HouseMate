@@ -1,74 +1,35 @@
 <!-- If user logged in show the navbar -->
 <div *ngIf="auth.user | async as user">
-  <!--Navbar-->
- <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#"> <i class="fa fa-home fa-lg" aria-hidden="true"></i>House Mate</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
-      aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button> -->
+  <mdb-navbar SideClass="navbar navbar-expand-md navbar-dark fixed-top bg-dark">         
+      <!-- Navbar brand -->
+      <logo><a class="navbar-brand" href="#"><i class="fa fa-home fa-lg" aria-hidden="true"></i>House Mate</a></logo>
 
-    <!-- <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
-      </ul>
-      <ul class="nav navbar-nav" style="margin-right:5%"> -->
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> {{user.displayName}}</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="#"><i class="fa fa-cog" aria-hidden="true"></i> Preferences</a>
-            <a href="" (click)="logout()" class="dropdown-item"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
-          </div>
-        </li> -->
-        <!-- <li class="nav-item btn-group" dropdown>
-          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>  -->
-<mdb-navbar SideClass="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-           
-    <!-- Navbar brand -->
-    <logo><a class="navbar-brand" href="#"><i class="fa fa-home fa-lg" aria-hidden="true"></i>House Mate</a></logo>
+      <!-- Collapsible content -->
+      <links>
 
-    <!-- Collapsible content -->
-    <links>
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                  <a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
+              </li>
+          </ul>
+          <!-- Links -->
+          <ul class="nav navbar-nav" style="margin-right:5%">
+            <li class="nav-item dropdown" dropdown>
+                  <a dropdownToggle mdbRippleRadius class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+                  <i class="fa fa-user" aria-hidden="true"></i> {{user.displayName}}<span class="caret"></span></a>
+                  <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                      <a class="dropdown-item waves-light" mdbRippleRadius href="#"><i class="fa fa-cog" aria-hidden="true" style="margin-right:5px;"></i>Preferences</a>
+                      <div class="divider dropdown-divider"></div>
+                      <a class="dropdown-item waves-light" (click)="logout()" mdbRippleRadius href="#"><i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px;"></i>Log Out</a>
+                  </div>
+              </li>
+          </ul>
+      </links>
+      <!-- Collapsible content -->
 
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbRippleRadius>Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbRippleRadius>Pricing</a>
-            </li>
-
-        </ul>
-        <!-- Links -->
-        <ul class="nav navbar-nav" style="margin-right:5%">
-           <li class="nav-item dropdown" dropdown>
-                <a dropdownToggle mdbRippleRadius class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
-                <i class="fa fa-user" aria-hidden="true"></i> {{user.displayName}}<span class="caret"></span></a>
-                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbRippleRadius href="#"><i class="fa fa-cog" aria-hidden="true" style="margin-right:5px;"></i>Preferences</a>
-                    <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" (click)="logout()" mdbRippleRadius href="#"><i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px;"></i>Log Out</a>
-                </div>
-            </li>
-        </ul>
-    </links>
-    <!-- Collapsible content -->
-
-</mdb-navbar>
-<!--/.Navbar-->
+  </mdb-navbar>
+  <!--/.Navbar-->
 </div>
 
 <div class="container">

@@ -46,24 +46,17 @@
 </div> -->
 
 <div *ngIf="!(auth.user | async); else alreadyLoggedIn">
-  <!-- <div class="form-signin text-center">
-    <h2 class="form-signin-heading">Please sign in to continue</h2>
-    <button (click)="signInWithFacebook()" class="btn btn-lg btn-primary" type="submit"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i> Sign in with Facebook</button> -->
-
-     <div class="row justify-content-md-center" style="margin-top:5%;">
-      <div class="col col-lg-6">
-        <div class="card text-center" style="height:15em">
-          <div class="card-block">
-            <h4 class="card-title"><i class="fa fa-home fa-2x" aria-hidden="true" style="margin-right:5px;"></i>House Mate</h4>
-            <p class="h6">Making house sharing an enjoyable experience</p>
-            <br>
-            <br>
-            <br>
-            <button (click)="signInWithFacebook()" type="button" class="btn btn-primary btn-lg" style="width:80%;"><i class="fa fa-facebook fa-lg" aria-hidden="true" style="margin-right:5px;"></i>Sign in with Facebook</button>
-          </div>
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto col-lg-8 col-md-8">
+      <div class="card">
+        <div class="card-body text-center">
+          <h4 class="card-title"><i class="fa fa-home fa-2x" aria-hidden="true" style="margin-right:5px;"></i>House Mate</h4>
+          <p class="card-text">Making house sharing an enjoyable experience</p>
+          <button (click)="signInWithFacebook()" class="btn btn-primary btn-lg" style="margin-top:4%;"><i class="fa fa-facebook fa-lg" aria-hidden="true" style="margin-right:5px;"></i>Sign in with Facebook</button>
         </div>
       </div>
-    </div> 
+    </div>
+  </div>
 </div>
 
 <ng-template #alreadyLoggedIn>
