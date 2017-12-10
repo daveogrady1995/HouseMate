@@ -20,6 +20,7 @@ interface User {
 export class AuthService {
 
   private user: Observable<User>;
+  public currentUserID: string;
 
   constructor(public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -33,6 +34,11 @@ export class AuthService {
           return Observable.of(null)
         }
       })
+
+      this.afAuth.authState.subscribe((user: User) => {
+        this.currentUserID = user.uid
+      });
+
   }
 
   ////// OAuth Methods /////

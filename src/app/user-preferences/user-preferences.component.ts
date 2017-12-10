@@ -5,11 +5,11 @@ import { AuthService } from "../core/auth.service";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-interface User {
-  uid: string;
-  email?: string;
-  photoURL?: string;
-  displayName?: string;
+interface UserPreferences {
+  occupation: string;
+  smoker: string;
+  lifestyle: string;
+  boozer: string;
 }
 
 @Component({
@@ -19,25 +19,31 @@ interface User {
 })
 export class UserPreferencesComponent {
 
-  userPrefForm: FormGroup;
+  public occupation: string = 'Student';
+  public smoker: string = 'Yes';
+  public lifestyle: string = 'Early Bird';
+  public boozer: string = 'Yes';
+  
 
-  constructor(private fb: FormBuilder, private afs: AngularFirestore,
-  public auth: AuthService) { 
-
-    this.userPrefForm = this.fb.group({
-      'occupation' : [null, Validators.required],
-      'smoker' : [null, Validators.required],
-      'lifestyle' : [null, Validators.required],
-      'boozer' : [null, Validators.required]
-    });
+  constructor(private afs: AngularFirestore,public auth: AuthService) { 
   }
 
 
   submitPreferences() : void {
-   console.log(this.userPrefForm.get('occupation'));
-
     // get a reference of the user document
-    //const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.auth.user}`);
+    const userRef: AngularFirestoreDocument<UserPreferences> = this.afs.doc(`users/${this.auth.currentUserID}`);
+
+    const data: UserPreferences = {
+      occupation: this.occupation,
+      smoker: this.smoker,
+      lifestyle: this.lifestyle,
+      boozer: this.boozer
+    }
+
+    debugger;
+
+    // update user document with preferences
+    userRef.update(data)
   }
 
 
