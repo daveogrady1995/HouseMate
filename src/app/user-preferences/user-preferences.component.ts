@@ -40,8 +40,6 @@ export class UserPreferencesComponent {
       boozer: this.boozer
     }
 
-    debugger;
-
     // update user document with preferences
     userRef.update(data)
   }

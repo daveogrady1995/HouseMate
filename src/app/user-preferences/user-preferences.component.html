@@ -1,190 +1,60 @@
-<!-- <br/>
 <div class="row justify-content-md-center">
-  <div class="col col-lg-6">
-    <form [formGroup]="userPrefForm" (ngSubmit)="submitPreferences()">
-      <div class="card border-info">
-        <div class="card-header">
-          Who would you like to move in with?
-        </div>
-        <div class="card-body">
-          <div class="btn-group">
-            <label class="btn btn-primary waves-light" [(ngModel)]="radioModel" mdbRadio="Left" mdbRippleRadius>
-                  Radio 1 (preselected)
-              </label>
-            <label class="btn btn-primary waves-light" [(ngModel)]="radioModel" mdbRadio="Middle" mdbRippleRadius>
-                  Radio 2
-              </label>
-            <label class="btn btn-primary waves-light" [(ngModel)]="radioModel" mdbRadio="Right" mdbRippleRadius>
-                  Radio 3
-              </label>
-          </div>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-      </div>
-    </form>
-  </div>
-</div> -->
-
-<div class="card">
-  <div class="card-body">
-    <h4 class="card-title">Who would you like to move in with?</h4>
-    <hr>
-    <p class="h6">Occupation</p>
-    <div class="btn-group">
-      <label class="btn btn-primary waves-light" [(ngModel)]="occupation" mdbRadio="Working Professional" mdbRippleRadius>
+  <div class="col-md-auto col-lg-8">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Who would you like to move in with?</h4>
+        <hr>
+        <p class="h6">Occupation</p>
+        <div class="btn-group">
+          <label class="btn btn-primary waves-light" [(ngModel)]="occupation" mdbRadio="Working Professional" mdbRippleRadius>
               Working Professional
           </label>
-      <label class="btn btn-primary waves-light" [(ngModel)]="occupation" mdbRadio="Student" mdbRippleRadius>
+          <label class="btn btn-primary waves-light" [(ngModel)]="occupation" mdbRadio="Student" mdbRippleRadius>
               Student
           </label>
-      <label class="btn btn-primary waves-light" [(ngModel)]="occupation" mdbRadio="Don't Mind" mdbRippleRadius>
+          <label class="btn btn-primary waves-light" [(ngModel)]="occupation" mdbRadio="Don't Mind" mdbRippleRadius>
               Don't Mind
           </label>
-    </div>
-    <p class="h6">Smoker</p>
-    <div class="btn-group">
-      <label class="btn btn-primary waves-light" [(ngModel)]="smoker" mdbRadio="Yes" mdbRippleRadius>
+        </div>
+        <p class="h6">Smoker</p>
+        <div class="btn-group">
+          <label class="btn btn-primary waves-light" [(ngModel)]="smoker" mdbRadio="Yes" mdbRippleRadius>
               Yes
           </label>
-      <label class="btn btn-primary waves-light" [(ngModel)]="smoker" mdbRadio="No" mdbRippleRadius>
+          <label class="btn btn-primary waves-light" [(ngModel)]="smoker" mdbRadio="No" mdbRippleRadius>
               No
           </label>
-      <label class="btn btn-primary waves-light" [(ngModel)]="smoker" mdbRadio="Don't Mind" mdbRippleRadius>
+          <label class="btn btn-primary waves-light" [(ngModel)]="smoker" mdbRadio="Don't Mind" mdbRippleRadius>
               Don't Mind
           </label>
-    </div>
-    <p class="h6">Lifestyle</p>
-    <div class="btn-group">
-      <label class="btn btn-primary waves-light" [(ngModel)]="lifestyle" mdbRadio="Early Bird" mdbRippleRadius>
+        </div>
+        <p class="h6">Lifestyle</p>
+        <div class="btn-group">
+          <label class="btn btn-primary waves-light" [(ngModel)]="lifestyle" mdbRadio="Early Bird" mdbRippleRadius>
               Early Bird
           </label>
-      <label class="btn btn-primary waves-light" [(ngModel)]="lifestyle" mdbRadio="Night Owl" mdbRippleRadius>
+          <label class="btn btn-primary waves-light" [(ngModel)]="lifestyle" mdbRadio="Night Owl" mdbRippleRadius>
               Night Owl
           </label>
-      <label class="btn btn-primary waves-light" [(ngModel)]="lifestyle" mdbRadio="Don't Mind" mdbRippleRadius>
+          <label class="btn btn-primary waves-light" [(ngModel)]="lifestyle" mdbRadio="Don't Mind" mdbRippleRadius>
               Don't Mind
           </label>
-    </div>
-    <p class="h6">Boozer</p>
-    <div class="btn-group">
-      <label class="btn btn-primary waves-light" [(ngModel)]="boozer" mdbRadio="Boozer" mdbRippleRadius>
-              Boozer
-          </label>
-      <label class="btn btn-primary waves-light" [(ngModel)]="boozer" mdbRadio="Yes" mdbRippleRadius>
+        </div>
+        <p class="h6">Boozer</p>
+        <div class="btn-group">
+          <label class="btn btn-primary waves-light" [(ngModel)]="boozer" mdbRadio="Yes" mdbRippleRadius>
               Yes
           </label>
-      <label class="btn btn-primary waves-light" [(ngModel)]="boozer" mdbRadio="No" mdbRippleRadius>
+          <label class="btn btn-primary waves-light" [(ngModel)]="boozer" mdbRadio="No" mdbRippleRadius>
               No
           </label>
+          <label class="btn btn-primary waves-light" [(ngModel)]="boozer" mdbRadio="Don't Mind" mdbRippleRadius>
+              Don't Mind
+          </label>
+        </div>
+        <br>
+        <button (click)="submitPreferences()" type="submit" class="btn btn-success btn-md" style="margin-top:2rem;margin-left:0px">Save Changes</button>
+      </div>
     </div>
-    <br>
-    <button (click)="submitPreferences()" type="submit" class="btn btn-success btn-md">Save Changes</button>
   </div>
 </div>
-
-
-   <!-- <div class="form-group radio">
-              <label for="occupation">Occupation</label>
-              <br>
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                  <input type="radio" formControlName="occupation" autocomplete="off" value="Working Professional" checked> Working Professional
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" formControlName="occupation" autocomplete="off" value="Student"> Student
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" formControlName="occupation" autocomplete="off" value="Don't Mind"> Don't Mind
-                </label>
-              </div>
-            </div>
-            <div class="form-group radio">
-              <label for="smoker">Smoker</label>
-              <br>
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                  <input type="radio" formControlName="smoker" autocomplete="off "value="Yes" checked > Yes
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" formControlName="smoker" autocomplete="off" value="No"> No
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" formControlName="smoker" autocomplete="off" value="Don't Mind"> Don't Mind
-                </label>
-              </div>
-            </div>
-            <div class="form-group radio">
-              <label for="lifestyle">Lifestyle</label>
-              <br>
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                  <input type="radio" formControlName="lifestyle" autocomplete="off" value="Night Owl" checked> Night Owl
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" formControlName="lifestyle" autocomplete="off" value="Early Bird"> Early Bird
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" formControlName="lifestyle" autocomplete="off" value="Don't Mind"> Don't Mind
-                </label>
-              </div>
-            </div>
-            <div class="form-group radio">
-              <label for="boozer">Boozer</label>
-              <br>
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                  <input type="radio" formControlName="boozer" autocomplete="off" value="Yes" checked> Yes
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" formControlName="boozer" autocomplete="off" value="No"> No
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" formControlName="boozer" autocomplete="off" value="Don't Mind"> Don't Mind
-                </label>
-              </div>
-            </div> -->
-
-
-  <!-- <div class="form-group">
-      <label for="disabledTextInput">Occupation</label>
-      <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
-    </div> 
-    <div class="form-group">
-      <label for="occupation">Occupation:</label>
-      <select id="occupation" class="form-control" formControlName="occupation">
-        <option>Working professional</option>
-        <option>Student</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="gender">Gender:</label>
-      <select id="gender" class="form-control" formControlName="gender">
-        <option>Male</option>
-        <option>Female</option>
-        <option>Both</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="smoker">Smoker:</label>
-      <select id="smoker" class="form-control" formControlName="smoker">
-        <option>Yes</option>
-        <option>No</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="petLover">Pet Lover:</label>
-      <select id="petLover" class="form-control" formControlName="petLover">
-        <option>Yes</option>
-        <option>No</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="disabledTextInput">Other details:</label>
-      <textarea formControlName="otherDetails" id="otherDetails" class="form-control"></textarea>
-    </div>
-     <div class="form-check">
-      <label class="form-check-label">
-        <input class="form-check-input" type="checkbox"> Can't check this
-      </label>
-    </div>  -->
