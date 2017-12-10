@@ -17,7 +17,7 @@ interface User {
   templateUrl: './user-preferences.component.html',
   styleUrls: ['./user-preferences.component.css']
 })
-export class UserPreferencesComponent implements OnInit {
+export class UserPreferencesComponent {
 
   userPrefForm: FormGroup;
 
@@ -26,29 +26,15 @@ export class UserPreferencesComponent implements OnInit {
 
     this.userPrefForm = this.fb.group({
       'occupation' : [null, Validators.required],
-      'otherDetails' : [null, Validators.required],
-      'gender' : [null, Validators.required],
       'smoker' : [null, Validators.required],
-      'petLover' : [null, Validators.required]
+      'lifestyle' : [null, Validators.required],
+      'boozer' : [null, Validators.required]
     });
   }
 
-  ngOnInit() {
-    // retrieve user who is currently logged in
-    // this.auth.getCurrentUserObservable().subscribe((user: User) => {
-    //    this.currentUser = {
-    //     uid: user.uid,
-    //     email: user.email || null,
-    //     displayName: user.displayName || 'nameless user',
-    //     photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
-    //   }
-    // });
-    // console.log(this.currentUser);
-    
-  }
 
   submitPreferences() : void {
-    //console.log(this.userPrefForm.value['occupation'])
+   console.log(this.userPrefForm.get('occupation'));
 
     // get a reference of the user document
     //const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.auth.user}`);

@@ -1,83 +1,153 @@
 <br/>
 <div class="row justify-content-md-center">
   <div class="col col-lg-6">
-    <div class="card border-info">
-      <div class="card-header">
-        Who would you like to move in with?
-      </div>
-      <div class="card-body">
-        <form [formGroup]="userPrefForm" (ngSubmit)="submitPreferences()">
-          <fieldset>
-            <div class="form-group">
-              <label for="smoker">Occupation</label>
+    <form [formGroup]="userPrefForm" (ngSubmit)="submitPreferences()">
+      <div class="card border-info">
+        <div class="card-header">
+          Who would you like to move in with?
+        </div>
+        <div class="card-body">
+          <div class="btn-group">
+            <label class="btn btn-primary waves-light" [(ngModel)]="radioModel" mdbRadio="Left" mdbRippleRadius>
+                  Radio 1 (preselected)
+              </label>
+            <label class="btn btn-primary waves-light" [(ngModel)]="radioModel" mdbRadio="Middle" mdbRippleRadius>
+                  Radio 2
+              </label>
+            <label class="btn btn-primary waves-light" [(ngModel)]="radioModel" mdbRadio="Right" mdbRippleRadius>
+                  Radio 3
+              </label>
+          </div>
+          <!-- <div class="form-group radio">
+              <label for="occupation">Occupation</label>
               <br>
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="option1" autocomplete="off" checked> Working Professional
-              </label>
+                  <input type="radio" formControlName="occupation" autocomplete="off" value="Working Professional" checked> Working Professional
+                </label>
                 <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option2" autocomplete="off"> Student
-              </label>
+                  <input type="radio" formControlName="occupation" autocomplete="off" value="Student"> Student
+                </label>
                 <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option3" autocomplete="off"> Don't Mind
-              </label>
+                  <input type="radio" formControlName="occupation" autocomplete="off" value="Don't Mind"> Don't Mind
+                </label>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group radio">
               <label for="smoker">Smoker</label>
               <br>
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-secondary active">
-                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Yes
+                  <input type="radio" formControlName="smoker" autocomplete="off "value="Yes" checked > Yes
                 </label>
                 <label class="btn btn-secondary">
-                  <input type="radio" name="options" id="option2" autocomplete="off"> No
+                  <input type="radio" formControlName="smoker" autocomplete="off" value="No"> No
                 </label>
                 <label class="btn btn-secondary">
-                  <input type="radio" name="options" id="option3" autocomplete="off"> Don't Mind
+                  <input type="radio" formControlName="smoker" autocomplete="off" value="Don't Mind"> Don't Mind
                 </label>
               </div>
             </div>
-            <div class="form-group">
-              <label for="smoker">Lifestyle</label>
+            <div class="form-group radio">
+              <label for="lifestyle">Lifestyle</label>
               <br>
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-secondary active">
-              <input type="radio" name="options" id="option1" autocomplete="off" checked> Night Owl
-            </label>
+                  <input type="radio" formControlName="lifestyle" autocomplete="off" value="Night Owl" checked> Night Owl
+                </label>
                 <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option2" autocomplete="off"> Early Bird
-            </label>
+                  <input type="radio" formControlName="lifestyle" autocomplete="off" value="Early Bird"> Early Bird
+                </label>
                 <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option3" autocomplete="off"> Don't Mind
-            </label>
+                  <input type="radio" formControlName="lifestyle" autocomplete="off" value="Don't Mind"> Don't Mind
+                </label>
               </div>
             </div>
-            <div class="form-group">
-              <label for="smoker">Boozer</label>
+            <div class="form-group radio">
+              <label for="boozer">Boozer</label>
               <br>
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-secondary active">
-              <input type="radio" name="options" id="option1" autocomplete="off" checked> Yes
-            </label>
+                  <input type="radio" formControlName="boozer" autocomplete="off" value="Yes" checked> Yes
+                </label>
                 <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option2" autocomplete="off"> No
-            </label>
+                  <input type="radio" formControlName="boozer" autocomplete="off" value="No"> No
+                </label>
                 <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option3" autocomplete="off"> Don't Mind
-            </label>
+                  <input type="radio" formControlName="boozer" autocomplete="off" value="Don't Mind"> Don't Mind
+                </label>
               </div>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-          </fieldset>
-        </form>
-      </div>
+            </div> -->
+          <br>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+    </div>
     </div>
   </div>
-</div>
 
-<!-- <div class="form-group">
+   <!-- <div class="form-group radio">
+              <label for="occupation">Occupation</label>
+              <br>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" formControlName="occupation" autocomplete="off" value="Working Professional" checked> Working Professional
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" formControlName="occupation" autocomplete="off" value="Student"> Student
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" formControlName="occupation" autocomplete="off" value="Don't Mind"> Don't Mind
+                </label>
+              </div>
+            </div>
+            <div class="form-group radio">
+              <label for="smoker">Smoker</label>
+              <br>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" formControlName="smoker" autocomplete="off "value="Yes" checked > Yes
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" formControlName="smoker" autocomplete="off" value="No"> No
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" formControlName="smoker" autocomplete="off" value="Don't Mind"> Don't Mind
+                </label>
+              </div>
+            </div>
+            <div class="form-group radio">
+              <label for="lifestyle">Lifestyle</label>
+              <br>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" formControlName="lifestyle" autocomplete="off" value="Night Owl" checked> Night Owl
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" formControlName="lifestyle" autocomplete="off" value="Early Bird"> Early Bird
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" formControlName="lifestyle" autocomplete="off" value="Don't Mind"> Don't Mind
+                </label>
+              </div>
+            </div>
+            <div class="form-group radio">
+              <label for="boozer">Boozer</label>
+              <br>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" formControlName="boozer" autocomplete="off" value="Yes" checked> Yes
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" formControlName="boozer" autocomplete="off" value="No"> No
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" formControlName="boozer" autocomplete="off" value="Don't Mind"> Don't Mind
+                </label>
+              </div>
+            </div> -->
+
+
+  <!-- <div class="form-group">
       <label for="disabledTextInput">Occupation</label>
       <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
     </div> 

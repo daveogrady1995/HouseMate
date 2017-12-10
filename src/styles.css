@@ -6,7 +6,8 @@
   background: lightgray;
 } 
 
-.mat-radio-button ~ .mat-radio-button {
-  padding-right: 16px;
+/* Nav styling */
+.dropdown .dropdown-menu .dropdown-item:hover {
+  background-color: #1dade2;
 }
 
