@@ -13,18 +13,8 @@ export class UserLoginComponent {
 
   private userID;
 
-  constructor(public auth: AuthService,
-              private afAuth: AngularFireAuth,
-              private router: Router) { }
+  constructor(public auth: AuthService, private router: Router) { }
 
-  ngOnInit() {  
-    // make sure current user id is available
-    this.afAuth.authState.subscribe(auth => {
-      if (auth) {
-        this.userID = auth.uid;
-      }
-    })
-  }
 
   private afterSignIn(): void {
     // Do after login stuff here, such router redirects, toast messages, etc.

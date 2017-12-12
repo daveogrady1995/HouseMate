@@ -1,9 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AuthService } from "../core/auth.service";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+
+interface User {
+  uid: string;
+  email?: string;
+  photoURL?: string;
+  displayName?: string;
+}
 
 interface UserPreferences {
   occupation: string;
@@ -19,19 +27,28 @@ interface UserPreferences {
 })
 export class UserPreferencesComponent {
 
-  public occupation: string = 'Student';
-  public smoker: string = 'Yes';
-  public lifestyle: string = 'Early Bird';
-  public boozer: string = 'Yes';
+  private currentUserID: string;
+
+  private occupation: string = '';
+  private smoker: string = '';
+  private lifestyle: string = '';
+  private boozer: string = '';
   
 
-  constructor(private afs: AngularFirestore,public auth: AuthService) { 
+  constructor(private afs: AngularFirestore,
+    private auth: AuthService,
+    private afAuth: AngularFireAuth) { 
   }
 
 
   submitPreferences() : void {
+    // get the current user id
+    this.afAuth.authState.subscribe((user: User) => {
+      this.currentUserID = user.uid
+    });
+
     // get a reference of the user document
-    const userRef: AngularFirestoreDocument<UserPreferences> = this.afs.doc(`users/${this.auth.currentUserID}`);
+    const userRef: AngularFirestoreDocument<UserPreferences> = this.afs.doc(`users/${this.currentUserID}`);
 
     const data: UserPreferences = {
       occupation: this.occupation,
