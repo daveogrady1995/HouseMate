@@ -3,7 +3,6 @@
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
  body {
   padding-top: 4.5rem;
-  background: lightgray;
 } 
 
 /* Nav styling */

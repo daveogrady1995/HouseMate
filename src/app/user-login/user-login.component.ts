@@ -13,7 +13,11 @@ export class UserLoginComponent {
 
   private userID;
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router) { 
+    document.body.style.background = 
+    "url('../../assets/images/house-mate.jpg') no-repeat center center fixed"; 
+    document.body.style.backgroundSize = "cover";
+  }
 
 
   private afterSignIn(): void {

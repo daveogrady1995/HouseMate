@@ -38,6 +38,8 @@ export class UserPreferencesComponent {
   constructor(private afs: AngularFirestore,
     private auth: AuthService,
     private afAuth: AngularFireAuth) { 
+
+      document.body.style.background = "lightgrey";
   }
 
 
