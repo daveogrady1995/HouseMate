@@ -10,6 +10,7 @@
   background-color: #1dade2;
 }
 
+/* Background image for login landing page */
 html, body {
   background-image:url('assets/images/house-mate.jpg');
   background-position: center center;
@@ -19,11 +20,5 @@ html, body {
   -o-background-size: cover;
   background-size: cover;
   height: 100%; 
-  overflow: hidden;
 }
-
-/* body {           
-  height:100%;
-  overflow: scroll;
-} */
 

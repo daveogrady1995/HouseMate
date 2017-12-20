@@ -39,7 +39,11 @@ export class UserPreferencesComponent {
     private auth: AuthService,
     private afAuth: AngularFireAuth) { 
 
-      document.body.style.background = "lightgrey";
+      document.documentElement.style.backgroundImage = "none";
+      document.body.style.background = "none";
+      document.body.style.backgroundColor = "lightgrey";
+      /* Move down content because we have a fixed navbar that is 3.5rem tall */
+      document.body.style.marginTop = "4.5em";
   }
 
 
