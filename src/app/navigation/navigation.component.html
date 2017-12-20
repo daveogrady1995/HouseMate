@@ -1,0 +1,23 @@
+<div *ngIf="auth.user | async as user">
+  <mdb-navbar SideClass="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <logo><a class="navbar-brand" href="#"><i class="fa fa-home fa-lg" aria-hidden="true"></i>House Mate</a></logo>
+    <links>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li class="nav-item dropdown" dropdown>
+          <a dropdownToggle mdbRippleRadius class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+                    <i class="fa fa-user" aria-hidden="true"></i> {{user.displayName}}<span class="caret"></span></a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mdbRippleRadius href="#"><i class="fa fa-cog" aria-hidden="true" style="margin-right:5px;"></i>Preferences</a>
+            <div class="divider dropdown-divider"></div>
+            <a class="dropdown-item waves-light" (click)="logout()" mdbRippleRadius href=""><i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px;"></i>Log Out</a>
+          </div>
+        </li>
+      </ul>
+    </links>
+  </mdb-navbar>
+</div>

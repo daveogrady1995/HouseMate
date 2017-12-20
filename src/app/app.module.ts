@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import 'hammerjs';
 
@@ -36,6 +37,7 @@ export const firebaseConfig = {
     UserLoginComponent,
     UserFormComponent,
     UserPreferencesComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { AuthService } from "../core/auth.service";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { NavigationComponent } from '../navigation/navigation.component';
 
 interface User {
   uid: string;
@@ -38,12 +39,6 @@ export class UserPreferencesComponent {
   constructor(private afs: AngularFirestore,
     private auth: AuthService,
     private afAuth: AngularFireAuth) { 
-
-      document.documentElement.style.backgroundImage = "none";
-      document.body.style.background = "none";
-      document.body.style.backgroundColor = "lightgrey";
-      /* Move down content because we have a fixed navbar that is 3.5rem tall */
-      document.body.style.marginTop = "4.5em";
   }
 
 

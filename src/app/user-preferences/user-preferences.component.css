@@ -1,12 +1,25 @@
+.wrapper {
+    position: absolute;
+    overflow: auto;
+    background-color: lightgray;
+    height: 100%;
+    width: 100%;
+}
+
+ .container {
+    padding-top: 4.5em;
+} 
+
 .card .card-body p {
     margin-bottom: 1rem;
     margin-top: 1rem;
 }
 
-/* For small devices reduce button group size */
 @media (max-width: 575px) {
+    /* For small devices reduce button group size */
     .btn {
-        font-size: 0.5rem;
-        padding: 0.55rem 1.13rem;
-    }    
+        font-size: 0.6rem;
+        padding: 0.75rem 1.43rem;
+    } 
+    
 }
