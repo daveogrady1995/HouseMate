@@ -1,19 +1,20 @@
-<div *ngIf="!(auth.user | async); else alreadyLoggedIn" style="margin-top:10%">
-  <div class="row justify-content-md-center">
-    <div class="col-md-auto col-lg-8 col-md-8">
-      <div class="card" style="background-color: #ffffffcf;">
-        <div class="card-body text-center">
-          <h3 class="card-title"><i class="fa fa-home fa-2x" aria-hidden="true" style="margin-right:5px;"></i>House Mate</h3>
-          <p style="font-size:1.1em" class="card-text">Making house sharing an enjoyable experience</p>
-          <button (click)="signInWithFacebook()" class="btn btn-primary btn-lg" style="margin-top:4%;"><i class="fa fa-facebook fa-lg" aria-hidden="true" style="margin-right:5px;"></i>Sign in with Facebook</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- <div *ngIf="!(auth.user | async); else alreadyLoggedIn">
 </div>
 
 <ng-template #alreadyLoggedIn>
   <p class="text-success">
     Already logged in!
   </p>
-</ng-template>
+</ng-template> -->
+
+<div class="row justify-content-center" style="margin-top:10%">
+  <div class="col-md-auto col-lg-8 col-md-8">
+    <div class="card" style="background-color: rgba(255,255,255,0.8);">
+      <div class="card-body text-center">
+        <h3 class="card-title"><i class="fa fa-home fa-2x" aria-hidden="true" style="margin-right:5px;"></i>House Mate</h3>
+        <p style="font-size:1.1em" class="card-text">Making house sharing an enjoyable experience</p>
+        <button (click)="signInWithFacebook()" class="btn btn-primary btn-lg" style="margin-top:4%;"><i class="fa fa-facebook fa-lg" aria-hidden="true" style="margin-right:5px;"></i>Sign in with Facebook</button>
+      </div>
+    </div>
+  </div>
+</div>

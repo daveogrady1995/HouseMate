@@ -1,12 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
- body {
+ /* body {
   padding-top: 4.5rem;
-} 
+}  */
 
 /* Nav styling */
 .dropdown .dropdown-menu .dropdown-item:hover {
   background-color: #1dade2;
 }
+
+html, body {
+  background-image:url('assets/images/house-mate.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%; 
+  overflow: hidden;
+}
+
+/* body {           
+  height:100%;
+  overflow: scroll;
+} */
 
