@@ -19,7 +19,7 @@ interface User {
 @Injectable()
 export class AuthService {
 
-  private user: Observable<User>;
+  user: Observable<User | null>;
 
   constructor(private afAuth: AngularFireAuth,
     private afs: AngularFirestore,

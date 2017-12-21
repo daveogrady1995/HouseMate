@@ -1,14 +1,18 @@
-.wrapper {
+/* .wrapper {
     position: absolute;
-    overflow: auto;
     background-color: lightgray;
     height: 100%;
     width: 100%;
-}
+} */
 
- .container {
-    padding-top: 4.5em;
-} 
+.wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding-top:70px;
+    background-color: lightgray;
+}
 
 .card .card-body p {
     margin-bottom: 1rem;

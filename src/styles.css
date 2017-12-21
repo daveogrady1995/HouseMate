@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 /* Nav styling */
 .dropdown .dropdown-menu .dropdown-item:hover {
   background-color: #1dade2;

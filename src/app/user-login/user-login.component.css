@@ -1,5 +1,6 @@
 .login-background {   
     position: absolute;
+    overflow: auto;
     background-image:url('../../assets/images/house-mate.jpg');
     background-position: center center;
     background-repeat: no-repeat;
