@@ -1,10 +1,14 @@
-body {
-  overflow: hidden;
-}
-
 /* Nav styling */
 .dropdown .dropdown-menu .dropdown-item:hover {
   background-color: #1dade2;
+}
+
+.wrapper {
+    position: relative;
+    min-height: 100vh;
+    overflow: auto;
+    padding-top:70px;
+    background-color: lightgray;
 }
 
 

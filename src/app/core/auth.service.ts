@@ -115,7 +115,7 @@ export class AuthService {
     console.error(error)
   }
 
-  // Sets user data to firestore after succesful login
+  // Updates user data to firestore after succesful login
   private updateUserData(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
@@ -126,7 +126,7 @@ export class AuthService {
       photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
     }
 
-    return userRef.set(data)
+    return userRef.update(data)
 
   }
 

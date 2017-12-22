@@ -22,6 +22,7 @@
         "../node_modules/font-awesome/css/font-awesome.min.css",
         "../node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
         "../node_modules/angular-bootstrap-md/scss/mdb-free.scss",
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
         "styles.css"
       ],
       "scripts": [

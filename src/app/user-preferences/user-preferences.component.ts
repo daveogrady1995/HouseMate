@@ -6,6 +6,7 @@ import { AuthService } from "../core/auth.service";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { NavigationComponent } from '../navigation/navigation.component';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 interface User {
   uid: string;
@@ -14,12 +15,12 @@ interface User {
   displayName?: string;
 }
 
-interface UserPreferences {
-  occupation: string;
-  smoker: string;
-  lifestyle: string;
-  boozer: string;
-}
+// interface UserPreferences {
+//   occupation: string;
+//   smoker: string;
+//   lifestyle: string;
+//   boozer: string;
+// }
 
 @Component({
   selector: 'app-user-preferences',
@@ -30,38 +31,42 @@ export class UserPreferencesComponent {
 
   private currentUserID: string;
 
-  private occupation: string = '';
-  private smoker: string = '';
-  private lifestyle: string = '';
-  private boozer: string = '';
+  private personality: string = 'Introvert';
+  private occupation: string = 'Working Professional';
+  private smoker: string = 'Yes';
+  private lifestyle: string = 'Early Bird';
   
 
   constructor(private afs: AngularFirestore,
     private auth: AuthService,
-    private afAuth: AngularFireAuth) { 
+    private afAuth: AngularFireAuth,
+    public toastr: ToastsManager) { 
   }
 
 
-  submitPreferences() : void {
+  submitPreferences(): void {
     // get the current user id
-    this.afAuth.authState.subscribe((user: User) => {
-      this.currentUserID = user.uid
-    });
+    // this.afAuth.authState.subscribe((user: User) => {
 
-    // get a reference of the user document
-    const userRef: AngularFirestoreDocument<UserPreferences> = this.afs.doc(`users/${this.currentUserID}`);
+    //   this.currentUserID = user.uid;
 
-    const data: UserPreferences = {
-      occupation: this.occupation,
-      smoker: this.smoker,
-      lifestyle: this.lifestyle,
-      boozer: this.boozer
-    }
+    //   // get a reference of the user document
+    //   const userRef = this.afs.doc(`users/${this.currentUserID}`);
 
-    // update user document with preferences
-    userRef.update(data)
+
+    //   const userPref = {
+    //     personality: this.personality,
+    //     occupation: this.occupation,
+    //     smoker: this.smoker,
+    //     lifestyle: this.lifestyle,
+    //   }
+
+    //   // update user document with preferences
+    //   userRef.update({
+    //     userPreferences: userPref,
+    //   });
+
+    // });
+    this.toastr.success('You are awesome!', 'Success!');
   }
-
-
-
 }

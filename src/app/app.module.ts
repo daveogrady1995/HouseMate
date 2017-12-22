@@ -1,3 +1,4 @@
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -10,6 +11,7 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import 'hammerjs';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
@@ -40,13 +42,15 @@ export const firebaseConfig = {
     NavigationComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    ToastModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent]
