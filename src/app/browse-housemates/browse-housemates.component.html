@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <app-navigation></app-navigation>
+  <div class="container">
+    <div class="row justify-content-md-center justify-content-center">
+      <div *ngFor="let user of users | async">
+        <div *ngIf="user.uid != currentUserID" style="padding:20px">
+          <div class="card">
+            <div class="text-center">
+              <img class="card-img-top" [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'">
+              <h3 class="card-title">{{ user.displayName }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row justify-content-md-center justify-content-center">
+      <div *ngFor="let user of users | async">
+        <div *ngIf="user.uid != currentUserID" style="padding:20px">
+          <div class="card">
+            <div class="text-center">
+              <img class="card-img-top" [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'">
+              <h3 class="card-title">{{ user.displayName }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

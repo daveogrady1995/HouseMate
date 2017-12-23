@@ -49,7 +49,8 @@ export class AuthService {
   }
 
   facebookLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider()
+    const provider = new firebase.auth.FacebookAuthProvider();
+    //provider.addScope('user_birthday');
     return this.oAuthLogin(provider);
   }
 

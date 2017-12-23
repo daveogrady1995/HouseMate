@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AuthService } from "../core/auth.service";
+import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { NavigationComponent } from '../navigation/navigation.component';
@@ -27,7 +28,7 @@ interface User {
   templateUrl: './user-preferences.component.html',
   styleUrls: ['./user-preferences.component.css']
 })
-export class UserPreferencesComponent {
+export class UserPreferencesComponent implements OnInit {
 
   private currentUserID: string;
 
@@ -40,33 +41,39 @@ export class UserPreferencesComponent {
   constructor(private afs: AngularFirestore,
     private auth: AuthService,
     private afAuth: AngularFireAuth,
-    public toastr: ToastsManager) { 
+    public toastr: ToastsManager,
+    private router: Router) { 
+  }
+
+  ngOnInit() {
+
+    //get the current user id
+    this.afAuth.authState.subscribe((user: User) => {
+
+      this.currentUserID = user.uid;
+    });
+
   }
 
 
   submitPreferences(): void {
-    // get the current user id
-    // this.afAuth.authState.subscribe((user: User) => {
-
-    //   this.currentUserID = user.uid;
-
-    //   // get a reference of the user document
-    //   const userRef = this.afs.doc(`users/${this.currentUserID}`);
+    // get a reference of the user document
+      const userRef = this.afs.doc(`users/${this.currentUserID}`);
 
 
-    //   const userPref = {
-    //     personality: this.personality,
-    //     occupation: this.occupation,
-    //     smoker: this.smoker,
-    //     lifestyle: this.lifestyle,
-    //   }
+      const userPref = {
+        personality: this.personality,
+        occupation: this.occupation,
+        smoker: this.smoker,
+        lifestyle: this.lifestyle,
+      }
 
-    //   // update user document with preferences
-    //   userRef.update({
-    //     userPreferences: userPref,
-    //   });
+      // update user document with preferences
+      userRef.update({
+        userPreferences: userPref,
+      });
 
-    // });
-    this.toastr.success('You are awesome!', 'Success!');
+      this.toastr.success('Your preferences have been updated!', 'Success!');
+      this.router.navigate(['/browse-housemates']);
   }
 }
