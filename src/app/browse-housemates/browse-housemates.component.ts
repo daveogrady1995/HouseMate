@@ -9,6 +9,7 @@ interface User {
   email?: string;
   photoURL?: string;
   displayName?: string;
+  userPreferences?: any;
 }
 
 
@@ -20,11 +21,14 @@ interface User {
 export class BrowseHousematesComponent implements OnInit {
 
   private currentUserID: string;
+  private currentUser: User;
 
   userCollection: AngularFirestoreCollection<User>;
-  users: Observable<User[]>
+  observableUsers: Observable<User[]>;
 
-  constructor(private afs: AngularFirestore, 
+  users: User[];
+
+  constructor(private afs: AngularFirestore,
     private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
@@ -33,9 +37,57 @@ export class BrowseHousematesComponent implements OnInit {
       this.currentUserID = user.uid
     });
 
-    // retrieve all users from database
     this.userCollection = this.afs.collection('users');
-    this.users = this.userCollection.valueChanges(); // observable of user data   
+    this.observableUsers = this.userCollection.valueChanges(); // observable of user data   
+
+    // subscribe to observable and retrieve users
+    this.observableUsers.subscribe((users: User[]) => {
+      this.users = users
+
+      // get current user
+      this.users.forEach(user => {
+        if (user.uid == this.currentUserID) {
+          this.currentUser = user
+        }
+      });
+
+    });
+
+  }
+
+  // compare preference of logged in user and other users in app
+  compareUserMatch(otherUserPreferences: any): number {
+    let matchPoints = 0;
+    let currentUserPref = this.currentUser.userPreferences;
+
+    if(currentUserPref.lifestyle == otherUserPreferences.lifestyle || (currentUserPref.lifestyle == "Don't Mind" || otherUserPreferences.lifestyle == "Don't Mind"))
+      matchPoints++
+    if(currentUserPref.occupation == otherUserPreferences.occupation || (currentUserPref.occupation == "Don't Mind" || otherUserPreferences.occupation == "Don't Mind"))
+      matchPoints++
+    if(currentUserPref.personality == otherUserPreferences.personality || (currentUserPref.personality == "Don't Mind" || otherUserPreferences.personality == "Don't Mind"))
+      matchPoints++
+    if(currentUserPref.smoker == otherUserPreferences.smoker || (currentUserPref.smoker == "Don't Mind" || otherUserPreferences.smoker == "Don't Mind"))
+      matchPoints++
+
+    let matchPercentage = matchPoints / 4;
+    return matchPercentage;
+    
   }
 
 }
+
+
+
+
+
+    // this.filteredUserCollection = this.afs.collection('users', ref => {
+    //   return ref.where('uid', '==', this.currentUserID)
+    //  });
+    // this.filteredUsers = this.filteredUserCollection.valueChanges();
+
+
+    // var userLoggedInPref = this.userCollection
+    // });
+
+    // return userPreferences.lifestyle;
+
