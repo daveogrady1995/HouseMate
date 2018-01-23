@@ -12,7 +12,7 @@
           <a dropdownToggle mdbRippleRadius class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
                     <i class="fa fa-user" aria-hidden="true"></i> {{user.displayName}}<span class="caret"></span></a>
           <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-            <a class="dropdown-item waves-light" mdbRippleRadius href="#"><i class="fa fa-cog" aria-hidden="true" style="margin-right:5px;"></i>Preferences</a>
+            <a (click)="userPreferences()" class="dropdown-item waves-light" mdbRippleRadius href="/preferences"><i class="fa fa-cog" aria-hidden="true" style="margin-right:5px;"></i>Preferences</a>
             <div class="divider dropdown-divider"></div>
             <a class="dropdown-item waves-light" (click)="logout()" mdbRippleRadius href=""><i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px;"></i>Log Out</a>
           </div>

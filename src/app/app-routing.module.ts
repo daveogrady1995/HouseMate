@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent },
   { path: 'form', component: UserFormComponent },
   { path: 'preferences', component: UserPreferencesComponent, canActivate: [AuthGuard] },
-  { path: 'browse-housemates', component: BrowseHousematesComponent }
+  { path: 'browse-housemates', component: BrowseHousematesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
