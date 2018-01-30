@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { AuthService } from "../core/auth.service";
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -14,14 +15,8 @@ interface User {
   email?: string;
   photoURL?: string;
   displayName?: string;
+  userPreferences?: any;
 }
-
-// interface UserPreferences {
-//   occupation: string;
-//   smoker: string;
-//   lifestyle: string;
-//   boozer: string;
-// }
 
 @Component({
   selector: 'app-user-preferences',
@@ -32,10 +27,16 @@ export class UserPreferencesComponent implements OnInit {
 
   private currentUserID: string;
 
-  private personality: string = 'Introvert';
-  private occupation: string = 'Working Professional';
-  private smoker: string = 'Yes';
-  private lifestyle: string = 'Early Bird';
+  userCollection: AngularFirestoreCollection<User>;
+  observableUsers: Observable<User[]>;
+
+  user: User[];
+
+  // default properties
+  private personality: string = '';
+  private occupation: string = '';
+  private smoker: string = '';
+  private lifestyle: string = '';
   
 
   constructor(private afs: AngularFirestore,
@@ -49,8 +50,38 @@ export class UserPreferencesComponent implements OnInit {
 
     //get the current user id
     this.afAuth.authState.subscribe((user: User) => {
-
       this.currentUserID = user.uid;
+
+      // retrieve users collection in database
+      this.userCollection = this.afs.collection('users', ref => {
+        return ref.where('uid', '==', this.currentUserID)
+      });
+      this.observableUsers = this.userCollection.valueChanges(); // observable of user data 
+      
+      // subscribe and retrieve user object
+      this.observableUsers.subscribe((users: User[]) => {
+        this.user = users
+
+        // if the user already has preferences then populate form with them
+        if(this.user[0].userPreferences) {
+
+          let userPreferences = this.user[0].userPreferences;
+          this.personality = userPreferences.personality;
+          this.occupation = userPreferences.occupation;
+          this.smoker = userPreferences.smoker;
+          this.lifestyle = userPreferences.lifestyle;
+        }  
+
+        // otherwise set default properties
+        else {
+          this.personality = 'Introvert';
+          this.occupation = 'Working Professional';
+          this.smoker = 'Yes';
+          this.lifestyle = 'Early Bird';
+        }
+
+      });
+   
     });
 
   }

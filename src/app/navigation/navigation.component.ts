@@ -15,9 +15,4 @@ export class NavigationComponent {
     this.auth.signOut();
   }
 
-  userPreferences() {
-    debugger;
-    this.router.navigate(['/preferences']);
-  }
-
 }

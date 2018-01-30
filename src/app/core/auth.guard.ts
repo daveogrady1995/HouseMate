@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
       map((user) => !!user),
       tap((loggedIn) => {
         if (!loggedIn) {
-          this.toastr.warning('Please login before you can access this page', 'Restricted!');
+          this.toastr.warning('Please login before you can access this page', 'Warning!');
           this.router.navigate(['/login']);
         }
       }),
