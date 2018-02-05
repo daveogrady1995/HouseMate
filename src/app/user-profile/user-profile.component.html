@@ -1,21 +1,18 @@
-<div class="box" >
+<!-- <div class="box" >
     <div *ngIf="auth.user | async; then authenticated else guest">
-            <!-- template will replace this div -->
+   
     </div>
 </div>
 
 
 
 
-<!-- User NOT logged in -->
 <ng-template #guest class="box">
     <h3>Howdy, GUEST</h3>
     <p class="card-text">Login to get started...</p>
     <button class="button" routerLink="/login">Login</button>
 </ng-template>
 
-
-<!-- User logged in -->
 <ng-template #authenticated>
     <div *ngIf="auth.user | async as user">
         <h3>Howdy, {{ user.displayName }}</h3>
@@ -23,4 +20,81 @@
         <p class="text-truncate">UID: {{ user.uid }}</p>
         <button class="button" (click)="logout()">Logout</button>
     </div>
-</ng-template>
+</ng-template> -->
+
+<div class="wrapper">
+    <app-navigation></app-navigation>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div *ngIf="selectedUser">
+                <div class="col-md-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>{{ selectedUser.displayName }}</h3>
+                            <img class="card-img-top rounded" [src]="selectedUser.photoURL || 'https://api.adorable.io/avatars/109/fire.png'">
+                            <!-- <div class="form-row" style="margin-top:10px">
+                                <div class="form-group col-3">
+                                    <p class="prefLabel">Personality</p>
+                                </div>
+                                <div class="form-group col-3">
+                                    <p class="prefLabel">Occupation</p>
+                                </div>
+                                <div class="form-group col-3">
+                                    <p class="prefLabel" style="margin-left:10px">Smoker</p>
+                                </div>
+                                <div class="form-group col-3">
+                                    <p class="prefLabel">Lifestyle</p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    <p>{{ selectedUser.userPreferences.personality }}</p>
+                                </div>
+                                <div class="form-group col-3">
+                                    <p>{{ selectedUser.userPreferences.occupation }}</p>
+                                </div>
+                                <div class="form-group col-3">
+                                    <p style="margin-left:10px">{{ selectedUser.userPreferences.smoker }}</p>
+                                </div>
+                                <div class="form-group col-3">
+                                    <p>{{ selectedUser.userPreferences.lifestyle }}</p>
+                                </div>
+                            </div> -->
+                            <div class="row" style="margin-top:10px">
+                                <div class="col">
+                                    <p class="prefLabel">Personality</p>
+                                </div>
+                                <div class="col">
+                                    <p class="prefLabel">Occupation</p>
+                                </div>
+                                <div class="col">
+                                    <p class="prefLabel">Smoker</p>
+                                </div>
+                                <div class="col">
+                                    <p class="prefLabel">Lifestyle</p>
+                                </div>   
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p>{{ selectedUser.userPreferences.personality }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ selectedUser.userPreferences.occupation }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ selectedUser.userPreferences.smoker }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ selectedUser.userPreferences.lifestyle }}</p>
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+

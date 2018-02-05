@@ -6,7 +6,7 @@
         <div *ngIf="user.uid != currentUserID">
           <div class="col">
             <div class="card" style="width: 15rem;margin-bottom: 10%">
-              <img class="card-img-top" [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'">
+              <a [routerLink]="['/profile', user.uid]" routerLinkActive="active"><img class="card-img-top" [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'"></a>
               <div class="card-body text-center">
                 <h4 class="card-title">{{ user.displayName }}</h4>
                 <p style="font-weight:bold">{{ compareUserMatch(user.userPreferences) | percent }} Match</p> 

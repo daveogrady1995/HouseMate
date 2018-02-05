@@ -23,10 +23,10 @@ export class BrowseHousematesComponent implements OnInit {
   private currentUserID: string;
   private currentUser: User;
 
-  userCollection: AngularFirestoreCollection<User>;
-  observableUsers: Observable<User[]>;
+  private userCollection: AngularFirestoreCollection<User>;
+  private observableUsers: Observable<User[]>;
 
-  users: User[];
+  private users: User[];
 
   constructor(private afs: AngularFirestore,
     private afAuth: AngularFireAuth) { }
@@ -42,14 +42,16 @@ export class BrowseHousematesComponent implements OnInit {
 
     // subscribe to observable and retrieve users
     this.observableUsers.subscribe((users: User[]) => {
-      this.users = users
+      users.length > 1 ? this.users = users : this.users = null // quick fix to remove existing data
 
-      // get current user
-      this.users.forEach(user => {
-        if (user.uid == this.currentUserID) {
-          this.currentUser = user
-        }
-      });
+      if (this.users != null) {
+        // get current user
+        this.users.forEach(user => {
+          if (user.uid == this.currentUserID) {
+            this.currentUser = user
+          }
+        });
+      }
 
     });
 

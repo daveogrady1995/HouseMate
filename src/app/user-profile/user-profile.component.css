@@ -1,0 +1,19 @@
+.card-img-top {
+    height: 380px;
+    width: 380px;
+}
+
+.prefLabel {
+    font-weight: bold;
+    color: #3c7ee8;
+}
+
+.card-body {
+    padding-left:40px;
+    padding-right: 40px;
+    padding-top: 20px;
+}
+
+p {
+    font-size: 15px;
+}

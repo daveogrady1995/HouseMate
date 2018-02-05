@@ -13,7 +13,7 @@ import { CoreModule } from './core/core.module';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: UserLoginComponent },
-  { path: 'profile', component: UserProfileComponent },
+  { path: 'profile/:uid', component: UserProfileComponent },
   { path: 'form', component: UserFormComponent },
   { path: 'preferences', component: UserPreferencesComponent, canActivate: [AuthGuard] },
   { path: 'browse-housemates', component: BrowseHousematesComponent, canActivate: [AuthGuard] }
