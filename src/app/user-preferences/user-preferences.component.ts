@@ -16,6 +16,7 @@ interface User {
   photoURL?: string;
   displayName?: string;
   userPreferences?: any;
+  flatPreferences?: any;
 }
 
 @Component({
@@ -25,6 +26,10 @@ interface User {
 })
 export class UserPreferencesComponent implements OnInit {
 
+  // keep track of form we are on
+  // user preferences or flat preferences
+  private currentFormQs: number = 0;
+
   private currentUserID: string;
 
   userCollection: AngularFirestoreCollection<User>;
@@ -32,11 +37,21 @@ export class UserPreferencesComponent implements OnInit {
 
   user: User[];
 
-  // default properties
+  public checkFlatModel: any = { single: false, double: true, twin: false };
+
+  // default userPref properties
   private personality: string = '';
   private occupation: string = '';
   private smoker: string = '';
   private lifestyle: string = '';
+
+  // default flatPref properties
+  private roomtype: string = '';
+  private flatRent: number;
+  private flatLocation: string = '';
+
+  private locationNotValid: boolean = false;
+  private rentNotValid: boolean = false;
   
 
   constructor(private afs: AngularFirestore,
@@ -62,7 +77,7 @@ export class UserPreferencesComponent implements OnInit {
       this.observableUsers.subscribe((users: User[]) => {
         this.user = users
 
-        // if the user already has preferences then populate form with them
+        // if the user already has user preferences then populate form with them
         if(this.user[0].userPreferences) {
 
           let userPreferences = this.user[0].userPreferences;
@@ -80,6 +95,20 @@ export class UserPreferencesComponent implements OnInit {
           this.lifestyle = 'Early Bird';
         }
 
+        // if the user already has user preferences then populate form with them
+        if(this.user[0].flatPreferences) {
+          let flatPreferences = this.user[0].flatPreferences;
+          this.flatLocation = flatPreferences.flatLocation;
+          this.flatRent = flatPreferences.flatRent;
+          this.roomtype = flatPreferences.roomType;
+
+        }
+
+        // otherwise set default properties
+        else {
+          this.roomtype = 'Double'
+        }
+
       });
    
     });
@@ -91,20 +120,66 @@ export class UserPreferencesComponent implements OnInit {
     // get a reference of the user document
       const userRef = this.afs.doc(`users/${this.currentUserID}`);
 
+      // reached end of questions
+      if(this.currentFormQs == 1)
+      {
 
-      const userPref = {
-        personality: this.personality,
-        occupation: this.occupation,
-        smoker: this.smoker,
-        lifestyle: this.lifestyle,
+        if(this.formIsValid()) {
+
+          const userPref = {
+            personality: this.personality,
+            occupation: this.occupation,
+            smoker: this.smoker,
+            lifestyle: this.lifestyle,
+          }
+
+          const flatPref = {
+            roomType: this.roomtype,
+            flatRent: this.flatRent,
+            flatLocation: this.flatLocation,
+          }
+    
+          // update user document with preferences
+          userRef.update({
+            userPreferences: userPref,
+            flatPreferences: flatPref
+          });
+  
+          this.toastr.success('Your preferences have been updated!', 'Success!');
+          this.router.navigate(['/browse-housemates']);
+
+        }
+        else {
+          this.toastr.warning('Form details are missing', 'Warning!');
+        }
+
       }
-
-      // update user document with preferences
-      userRef.update({
-        userPreferences: userPref,
-      });
-
-      this.toastr.success('Your preferences have been updated!', 'Success!');
-      this.router.navigate(['/browse-housemates']);
+      else {
+        // go to next question
+        this.currentFormQs++;
+      }
   }
+
+  formIsValid(): boolean {
+
+    let formValid: boolean = true; 
+
+    if(this.flatRent == null) {
+      this.rentNotValid = true;
+      formValid = false;
+    }
+
+    if(this.flatLocation == '') {
+      this.locationNotValid = true;
+      formValid = false;
+    }
+
+    if(!formValid) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
 }
