@@ -20,6 +20,7 @@ interface User {
 export class AuthService {
 
   user: Observable<User | null>;
+  public globalVariable = "this is global";
 
   constructor(private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -127,37 +128,7 @@ export class AuthService {
       photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
     }
 
-    return userRef.update(data)
+    return userRef.set(data)
 
   }
-
-  // retrieve user who is currently logged in
-  //getCurrentUserObservable(): any {
-
-    //return this.afAuth.authState;
-    // let userLoggedIn: User;
-
-    // if (this.authState != null) {
-    //   return userLoggedIn = {
-    //     uid: user.uid,
-    //     email: user.email || null,
-    //     displayName: user.displayName || 'nameless user',
-    //     photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
-    //   }
-
-  //}
-
-  //  return this.authenticated ? this.authState : null;
-
-  // this.afAuth.authState.subscribe((user: User) => {
-  //   let userLoggedIn = {
-  //     uid: user.uid,
-  //     email: user.email || null,
-  //     displayName: user.displayName || 'nameless user',
-  //     photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
-  //   }
-  // });
-
-  // return of(userLoggedIn);
-
 }

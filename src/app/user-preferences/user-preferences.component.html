@@ -71,19 +71,19 @@
 <ng-template #flatPreferences>
     <h4 class="card-title">What is your ideal accomodation?</h4>
     <hr>
-    <div class="md-form form-sm" style="width:300px">
-        <input mdbActive data-error="Location is required" type="text" class="form-control" [(ngModel)]="flatLocation" id="location" mdbInputValidate>
-        <label for="location" class="active">Flat location</label>
-    </div>
-    <div *ngIf="locationNotValid">
-            <label class="errorMessage">Location is required</label>
+    <div class="md-form form-sm" style="width:300px;margin-top:20px;">
+        <input placeholder="location" type="text" class="form-control" [(ngModel)]="flatLocation" id="location">
+        <label for="location" class="active">Flat Location</label>
+        <div *ngIf="locationNotValid">
+            <span class="inputVal text-danger">Location is required</span>
         </div>
-    <div class="md-form form-sm" style="width:300px">
-        <input mdbActive data-error="Rent is required" type="number" class="form-control" [(ngModel)]="flatRent" id="rent" mdbInputValidate>
-        <label for="rent" class="active">Rent per month</label>
     </div>
-    <div *ngIf="rentNotValid">
-        <label class="errorMessage">Rent is required</label>
+    <div class="md-form form-sm" style="width:300px">
+        <input placeholder="rent" type="number" class="form-control" [(ngModel)]="flatRent" id="rent">
+        <label for="rent" class="active">Rent per month</label>
+        <div *ngIf="rentNotValid">
+            <span class="inputVal text-danger">Location is required</span>
+        </div>
     </div>
     <p class="h6">Room Type</p>
     <div class="btn-group">

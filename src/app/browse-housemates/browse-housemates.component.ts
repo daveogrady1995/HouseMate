@@ -10,6 +10,7 @@ interface User {
   photoURL?: string;
   displayName?: string;
   userPreferences?: any;
+  flatPreferences?: any;
 }
 
 
