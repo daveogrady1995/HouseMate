@@ -11,6 +11,7 @@ interface User {
   photoURL?: string;
   displayName?: string;
   userPreferences?: any;
+  flatPreferences?: any;
 }
 
 interface TeamUpRequest {
@@ -27,7 +28,12 @@ interface TeamUpRequest {
 export class NavigationComponent implements OnInit {
 
   private loggedInUserID: string;
+  private loggedInUser: User;
+
   private messageCount: number = 0; // show unread message count
+
+  private usersCollection: AngularFirestoreCollection<User>;
+  private observableUsers: Observable<User[]>;
 
   private teamUpRequestsCollection: AngularFirestoreCollection<TeamUpRequest>;
   private observableTeamUpRequests: Observable<TeamUpRequest[]>;
@@ -43,23 +49,48 @@ export class NavigationComponent implements OnInit {
     this.afAuth.authState.subscribe((user: User) => {
       this.loggedInUserID = user.uid
 
-      // query database to retrieve team requests sent to user logged in that are unaccepted
-      this.teamUpRequestsCollection = this.afs.collection('teamUpRequests', ref => {
-        return ref.where('recepientUid', '==', this.loggedInUserID).where('isAccepted', '==', false)
-      });
-      this.observableTeamUpRequests = this.teamUpRequestsCollection.valueChanges(); // observable of user data   
+      // get logged in user object
+      this.getLoggedInUser();
 
-      // subscribe to observable and team up requests
-      this.observableTeamUpRequests.subscribe((teamRequests: TeamUpRequest[]) => {
-        this.messageCount = teamRequests.length; // number of requests displayed in nav
-      });
-
+      // display team requests in nav
+      this.getTeamRequestsCount();
+      
     });
+
 
   } 
   
   logout() {
     this.auth.signOut();
+  }
+
+  getLoggedInUser() {
+    // query database to retrieve user logged in
+    this.usersCollection = this.afs.collection('users', ref => {
+      return ref.where('uid', '==', this.loggedInUserID)
+    });
+    this.observableUsers = this.usersCollection.valueChanges(); // observable of user data   
+
+    // subscribe to observable and team up requests
+    this.observableUsers.subscribe((users: User[]) => {
+      debugger;
+      this.loggedInUser = users[0]; // number of requests displayed in nav
+    });
+
+  }
+
+  getTeamRequestsCount() {
+
+    // query database to retrieve team requests sent to user logged in that are unaccepted
+    this.teamUpRequestsCollection = this.afs.collection('teamUpRequests', ref => {
+      return ref.where('recepient.uid', '==', this.loggedInUserID).where('isAccepted', '==', false)
+    });
+    this.observableTeamUpRequests = this.teamUpRequestsCollection.valueChanges(); // observable of user data   
+
+    // subscribe to observable and team up requests
+    this.observableTeamUpRequests.subscribe((teamRequests: TeamUpRequest[]) => {
+      this.messageCount = teamRequests.length; // number of requests displayed in nav
+    });
   }
 
 

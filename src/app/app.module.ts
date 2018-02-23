@@ -26,6 +26,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { CoreModule } from './core/core.module';
 
 import { environment } from '../environments/environment';
+import { UserRequestsComponent } from './user-requests/user-requests.component';
 
 
 export const firebaseConfig = environment.firebaseConfig;
@@ -39,6 +40,7 @@ export const firebaseConfig = environment.firebaseConfig;
     UserPreferencesComponent,
     NavigationComponent,
     BrowseHousematesComponent,
+    UserRequestsComponent,
   ],
   imports: [
     BrowserAnimationsModule,

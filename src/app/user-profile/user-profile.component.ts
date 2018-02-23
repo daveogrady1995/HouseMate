@@ -13,11 +13,12 @@ interface User {
   photoURL?: string;
   displayName?: string;
   userPreferences?: any;
+  flatPreferences?: any;
 }
 
 interface TeamUpRequest {
-  requesterUid: string;
-  recepientUid: string;
+  requester: any;
+  recepient: any;
   isAccepted: boolean;
 }
 
@@ -30,15 +31,17 @@ export class UserProfileComponent implements OnInit {
 
   // user logged in
   private loggedInUserID: string;
+  private loggedInUser: User;
 
-  // other user
+  // selected user
   private currentUserID: string; 
-  private selectedUser: User;
+  private currentUser: User;
 
   private teamUpRequestSent: boolean = false;
 
   private userCollection: AngularFirestoreCollection<User>;
   private observableUsers: Observable<User[]>;
+  private users: User[];
 
   constructor(private route: ActivatedRoute, 
     private afs: AngularFirestore,
@@ -51,40 +54,61 @@ export class UserProfileComponent implements OnInit {
       this.currentUserID = params['uid'];
     });
 
-    // query database to retrieve selected user
-    this.userCollection = this.afs.collection('users', ref => {
-      return ref.where('uid', '==', this.currentUserID)
-    });
-    this.observableUsers = this.userCollection.valueChanges(); // observable of user data 
-
-    // subscribe and retrieve user object
-    this.observableUsers.subscribe((users: User[]) => {
-      this.selectedUser = users[0]
-    });
-
     // get the logged in user id
     this.afAuth.authState.subscribe((user: User) => {
       this.loggedInUserID = user.uid;
     });
 
+    this.userCollection = this.afs.collection('users');
+    this.observableUsers = this.userCollection.valueChanges(); // observable of user data  
+
+    // subscribe to observable and retrieve users
+    this.observableUsers.subscribe((users: User[]) => {
+      this.users = users;
+
+      // get selected user and logged in user
+      this.users.forEach(user => {
+        if (user.uid == this.currentUserID) {
+          this.currentUser = user;
+        }
+        if (user.uid == this.loggedInUserID) {
+          this.loggedInUser = user;
+        }
+      });
+    });
+
   }
 
   teamUpWithUser() {
-      // get a reference of a new team up request document from this user
-      const teamUpReqRef: AngularFirestoreDocument<TeamUpRequest> = this.afs.doc(`teamUpRequests/${this.currentUserID}`);
+    const requester = {
+      uid: this.loggedInUser.uid,
+      displayName: this.loggedInUser.displayName,
+      photoURL: this.loggedInUser.photoURL,
+      flatLocation: this.loggedInUser.flatPreferences.flatLocation
+    }
 
-      // create new team request
-      const data: TeamUpRequest = {
-        requesterUid: this.loggedInUserID,
-        recepientUid: this.currentUserID,
-        isAccepted: false
-      }
+    const recepient = {
+      uid: this.currentUser.uid,
+      displayName: this.currentUser.displayName,
+      photoURL: this.currentUser.photoURL,
+      flatLocation: "Sligo"
+    }
 
-      // update document
-       teamUpReqRef.set(data);
+    // get a reference of a new team up request document
+    const teamUpReqRef: AngularFirestoreDocument<TeamUpRequest> = this.afs.doc(`teamUpRequests/${this.currentUserID}`);
 
-       this.teamUpRequestSent = true;
-       this.toastr.success('Request has been sent!', 'Success!');
+    // create new team request sent from logged in user to selected user
+    const data: TeamUpRequest = {
+      requester: requester,
+      recepient: recepient,
+      isAccepted: false
+    }
+
+    // update document
+    teamUpReqRef.set(data);
+
+    this.teamUpRequestSent = true;
+    this.toastr.success('Request has been sent!', 'Success!');
   }
 
 }

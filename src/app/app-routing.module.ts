@@ -6,6 +6,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserPreferencesComponent } from './user-preferences/user-preferences.component';
 import { BrowseHousematesComponent } from './browse-housemates/browse-housemates.component';
+import { UserRequestsComponent } from './user-requests/user-requests.component';
 
 import { AuthGuard } from './core/auth.guard';
 import { CoreModule } from './core/core.module';
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'profile/:uid', component: UserProfileComponent },
   { path: 'form', component: UserFormComponent },
   { path: 'preferences', component: UserPreferencesComponent, canActivate: [AuthGuard] },
-  { path: 'browse-housemates', component: BrowseHousematesComponent, canActivate: [AuthGuard] }
+  { path: 'browse-housemates', component: BrowseHousematesComponent, canActivate: [AuthGuard] },
+  { path: 'requests', component: UserRequestsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

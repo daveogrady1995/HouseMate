@@ -8,13 +8,13 @@
        
     </ul>
     <form class="form-inline waves-light" mdbRippleRadius>
-      <ul class="navbar-nav mr-auto">
+      <ul *ngIf="loggedInUser" class="navbar-nav mr-auto">
           <li class="nav-item">
-              <a class="nav-link waves-light" mdbRippleRadius>{{messageCount}} <i class="fa fa-envelope" aria-hidden="true"></i></a>
+              <a class="nav-link waves-light" mdbRippleRadius href="/requests">{{messageCount}} <i class="fa fa-envelope" aria-hidden="true"></i></a>
           </li>
         <li class="nav-item dropdown" dropdown>
           <a dropdownToggle mdbRippleRadius class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
-            <i class="fa fa-user" aria-hidden="true"></i> David O Grady
+            <i class="fa fa-user" aria-hidden="true"></i> {{loggedInUser.displayName}}
             <span class="caret"></span>
           </a>
           <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
