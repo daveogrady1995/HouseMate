@@ -73,7 +73,6 @@ export class NavigationComponent implements OnInit {
 
     // subscribe to observable and team up requests
     this.observableUsers.subscribe((users: User[]) => {
-      debugger;
       this.loggedInUser = users[0]; // number of requests displayed in nav
     });
 

@@ -17,6 +17,7 @@ interface User {
 }
 
 interface TeamUpRequest {
+  uid: string;
   requester: any;
   recepient: any;
   isAccepted: boolean;
@@ -94,21 +95,27 @@ export class UserProfileComponent implements OnInit {
       flatLocation: "Sligo"
     }
 
+
+    // generate uid
+    const pushkey = this.afs.createId();
+
     // get a reference of a new team up request document
-    const teamUpReqRef: AngularFirestoreDocument<TeamUpRequest> = this.afs.doc(`teamUpRequests/${this.currentUserID}`);
+    const teamUpReqRef: AngularFirestoreDocument<TeamUpRequest> = this.afs.doc(`teamUpRequests/${pushkey}`);
 
     // create new team request sent from logged in user to selected user
     const data: TeamUpRequest = {
+      uid: pushkey,
       requester: requester,
       recepient: recepient,
       isAccepted: false
     }
 
-    // update document
+    // add new document
     teamUpReqRef.set(data);
 
+
     this.teamUpRequestSent = true;
-    this.toastr.success('Request has been sent!', 'Success!');
+    this.toastr.success('Team Request has been sent to ' + recepient.displayName, 'Success!');
   }
 
 }

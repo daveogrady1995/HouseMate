@@ -9,18 +9,18 @@
                     <ul class="list-group list-group-flush">
                         <li *ngFor="let userRequest of teamRequests" class="list-group-item">
                             <div class="row" style="margin-top:10px;margin-bottom:10px;">
-                                <div class="col-md-2 col-sm-3">
+                                <div class="col-md-3 col-sm-5">
                                     <img [src]="userRequest.requester.photoURL" alt="photo">
                                 </div>
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-5 col-sm-6">
                                     <h3>{{userRequest.requester.displayName}}</h3>
                                     <p>{{userRequest.requester.flatLocation}}</p>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-success" style="font-size: 0.5rem">Accept</button>
+                                    <button (click)="acceptTeamRequest(userRequest.uid)" type="button" class="btn btn-success" style="font-size: 0.5rem">Accept</button>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger" style="font-size: 0.5rem">Decline</button>
+                                    <button (click)="declineTeamRequest(userRequest.uid)" type="button" class="btn btn-danger" style="font-size: 0.5rem">Decline</button>
                                 </div>
                             </div>
                         </li>

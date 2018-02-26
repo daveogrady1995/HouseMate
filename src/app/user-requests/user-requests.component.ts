@@ -3,8 +3,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 interface TeamUpRequest {
+  uid: string;
   recepient: any;
   requester: any;
   isAccepted: boolean;
@@ -36,6 +38,7 @@ export class UserRequestsComponent implements OnInit {
   private observableTeamUpRequests: Observable<TeamUpRequest[]>;
 
   constructor(private afs: AngularFirestore,
+    public toastr: ToastsManager,
     private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
@@ -62,6 +65,22 @@ export class UserRequestsComponent implements OnInit {
       this.teamRequests = teamRequests;
       this.requestCount = teamRequests.length;
     });
+  }
+
+  acceptTeamRequest(docUid) {
+    const request = {
+      isAccepted: true
+    }
+    // update accept field to true
+    this.teamUpRequestsCollection.doc(docUid).update(request);
+    this.toastr.success('You have accepted this team request', 'Accepted!');
+
+  }
+
+  declineTeamRequest(docUid) {
+    // remove team request from database
+    this.teamUpRequestsCollection.doc(docUid).delete();
+    this.toastr.error('You have declined this team request', 'Declined!');
   }
 
 }
