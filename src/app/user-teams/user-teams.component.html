@@ -1,0 +1,34 @@
+<div class="wrapper">
+    <app-navigation></app-navigation> 
+     <div class="container"> 
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">My Teams ({{teamsCount}})</h4>
+                      <ul class="list-group list-group-flush">
+                          <li *ngFor="let user of userTeams" class="list-group-item">
+                              <div class="row" style="margin-top:10px;margin-bottom:10px;">
+                                  <div class="col-md-3 col-sm-5">
+                                      <img [src]="user.photoURL" alt="photo">
+                                  </div>
+                                  <div class="col-md-5 col-sm-6">
+                                      <h3>{{user.displayName}}</h3>
+                                      <p>{{user.flatLocation}}</p>
+                                  </div>
+                                  <div class="col-md-2">
+                                      <button (click)="acceptTeamRequest(userRequest.uid)" type="button" class="btn btn-primary" style="font-size: 0.6rem">View</button>
+                                  </div>
+                                  <div class="col-md-2">
+                                      <button (click)="declineTeamRequest(userRequest.uid)" type="button" class="btn btn-danger" style="font-size: 0.6rem">Leave</button>
+                                  </div>
+                              </div>
+                          </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div> 
+  </div> 
+  

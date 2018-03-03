@@ -95,7 +95,6 @@ export class UserProfileComponent implements OnInit {
       flatLocation: "Sligo"
     }
 
-
     // generate uid
     const pushkey = this.afs.createId();
 

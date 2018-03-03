@@ -1,0 +1,61 @@
+.messageContainer {
+    position: relative;
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.messageContainer::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.messageContainer img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.messageContainer img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+.time-left {
+    float: left;
+    color: #999;
+}
+
+h4 {
+    padding-top: 15px;
+    padding-left: 15px;
+    font-weight: 400;
+}
+
+.card-body {
+    overflow: auto;
+    max-height: 22rem;
+    padding-bottom: 0.2rem
+}
+
+.btn.btn-lg {
+    align-self: center;
+    font-size: 0.9rem;
+    padding: 1rem 1.4rem;
+}

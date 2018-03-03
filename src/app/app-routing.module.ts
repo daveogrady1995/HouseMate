@@ -7,6 +7,8 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserPreferencesComponent } from './user-preferences/user-preferences.component';
 import { BrowseHousematesComponent } from './browse-housemates/browse-housemates.component';
 import { UserRequestsComponent } from './user-requests/user-requests.component';
+import { UserTeamsComponent } from './user-teams/user-teams.component';
+import { TeamMessagesComponent } from './team-messages/team-messages.component';
 
 import { AuthGuard } from './core/auth.guard';
 import { CoreModule } from './core/core.module';
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'form', component: UserFormComponent },
   { path: 'preferences', component: UserPreferencesComponent, canActivate: [AuthGuard] },
   { path: 'browse-housemates', component: BrowseHousematesComponent, canActivate: [AuthGuard] },
-  { path: 'requests', component: UserRequestsComponent, canActivate: [AuthGuard] }
+  { path: 'requests', component: UserRequestsComponent, canActivate: [AuthGuard] },
+  { path: 'teams', component: UserTeamsComponent, canActivate: [AuthGuard] },
+  { path: 'messages', component: TeamMessagesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

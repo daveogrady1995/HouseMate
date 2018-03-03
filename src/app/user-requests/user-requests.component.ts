@@ -12,6 +12,11 @@ interface TeamUpRequest {
   isAccepted: boolean;
 }
 
+interface Team {
+  teamLeader: User;
+  teamMember: User;
+}
+
 interface User {
   uid: string;
   email?: string;
@@ -19,6 +24,7 @@ interface User {
   displayName?: string;
   userPreferences?: any;
   flatPreferences?: any;
+  teams?: any[];
 }
 
 
@@ -33,16 +39,15 @@ export class UserRequestsComponent implements OnInit {
   private teamRequests: TeamUpRequest[];
 
   private requestCount: number;
-
   private teamUpRequestsCollection: AngularFirestoreCollection<TeamUpRequest>;
   private observableTeamUpRequests: Observable<TeamUpRequest[]>;
+  private teamsCollection: AngularFirestoreCollection<Team>;
 
   constructor(private afs: AngularFirestore,
     public toastr: ToastsManager,
     private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
-
        // get uid of  logged in user
        this.afAuth.authState.subscribe((user: User) => {
         this.loggedInUserID = user.uid
@@ -73,6 +78,23 @@ export class UserRequestsComponent implements OnInit {
     }
     // update accept field to true
     this.teamUpRequestsCollection.doc(docUid).update(request);
+
+    // retrieve data from team request to put into teams field
+    let teamRequest: TeamUpRequest;
+    this.teamRequests.forEach(request => {
+      if(request.uid == docUid) {
+        teamRequest = request
+      }
+    });
+
+    const userRef = this.afs.doc(`teams/${docUid}`);
+    const teamData: Team = {
+      teamLeader: teamRequest.requester,
+      teamMember: teamRequest.recepient
+    }
+
+    userRef.set(teamData);
+
     this.toastr.success('You have accepted this team request', 'Accepted!');
 
   }

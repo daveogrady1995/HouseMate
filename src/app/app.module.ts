@@ -27,6 +27,8 @@ import { CoreModule } from './core/core.module';
 
 import { environment } from '../environments/environment';
 import { UserRequestsComponent } from './user-requests/user-requests.component';
+import { UserTeamsComponent } from './user-teams/user-teams.component';
+import { TeamMessagesComponent } from './team-messages/team-messages.component';
 
 
 export const firebaseConfig = environment.firebaseConfig;
@@ -41,6 +43,8 @@ export const firebaseConfig = environment.firebaseConfig;
     NavigationComponent,
     BrowseHousematesComponent,
     UserRequestsComponent,
+    UserTeamsComponent,
+    TeamMessagesComponent,
   ],
   imports: [
     BrowserAnimationsModule,
