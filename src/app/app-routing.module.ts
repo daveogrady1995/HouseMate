@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'browse-housemates', component: BrowseHousematesComponent, canActivate: [AuthGuard] },
   { path: 'requests', component: UserRequestsComponent, canActivate: [AuthGuard] },
   { path: 'teams', component: UserTeamsComponent, canActivate: [AuthGuard] },
-  { path: 'messages', component: TeamMessagesComponent, canActivate: [AuthGuard] }
+  { path: 'messages/:teamUid', component: TeamMessagesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

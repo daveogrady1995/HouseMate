@@ -7,39 +7,31 @@
           <h4 class="card-title" style="font-weight:400">Team Messages</h4>
           <hr style="margin:0;">
           <div class="card-body">
-            <div class="messageContainer">
-              <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Avatar" style="width:100%;">
-              <p>Hello. How are you today?</p>
-              <span class="time-right">11:00</span>
-            </div>
-
-            <div class="messageContainer darker">
-              <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Avatar" class="right" style="width:100%;">
-              <p>Hey! I'm fine. Thanks for asking!</p>
-              <span class="time-left">11:01</span>
-            </div>
-            <div class="messageContainer">
-              <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Avatar" style="width:100%;">
-              <p>Hello. How are you today?</p>
-              <span class="time-right">11:00</span>
-            </div>
-
-            <div class="messageContainer darker">
-              <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Avatar" class="right" style="width:100%;">
-              <p>Hey! I'm fine. Thanks for asking!</p>
-              <span class="time-left">11:01</span>
+            <div *ngIf="team">
+              <div *ngFor="let message of team.messages">
+                <div *ngIf="message.sentByUser.uid == loggedInUserID" class="messageContainer darker">
+                  <img [src]="message.sentByUser.photoURL" alt="Avatar" class="right" style="width:100%;">
+                  <p>{{message.content}}</p>
+                  <span class="time-left">11:01</span>
+                </div>
+                <div *ngIf="message.sentByUser.uid != loggedInUserID" class="messageContainer">
+                  <img [src]="message.sentByUser.photoURL" alt="Avatar" style="width:100%;">
+                  <p>{{message.content}}</p>
+                  <span class="time-right">11:00</span>
+                </div>
+              </div>
             </div>
           </div>
           <form>
               <div class="row">
                 <div class="col-md-9" style="align-self:center;">
                   <div class="md-form" style="padding-left:15px;">
-                    <input placeholder="Type your message here" type="text" id="form76" class="md-textarea"/>
+                    <input placeholder="Type your message here" [(ngModel)]="messageContent" name="message" type="text" id="form76" class="md-textarea"/>
                   </div>
                 </div>
                 <div class="col-md-3">
                     <div class="md-form">
-                        <button class="btn btn-primary btn-lg waves-light" mdbRippleRadius>Send</button>
+                        <button (click)="submitMessage()" class="btn btn-primary btn-lg waves-light" mdbRippleRadius>Send</button>
                     </div>
                   </div>
               </div>

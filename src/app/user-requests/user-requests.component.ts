@@ -15,6 +15,7 @@ interface TeamUpRequest {
 interface Team {
   teamLeader: User;
   teamMember: User;
+  teamUId: string;
 }
 
 interface User {
@@ -90,7 +91,8 @@ export class UserRequestsComponent implements OnInit {
     const userRef = this.afs.doc(`teams/${docUid}`);
     const teamData: Team = {
       teamLeader: teamRequest.requester,
-      teamMember: teamRequest.recepient
+      teamMember: teamRequest.recepient,
+      teamUId: docUid
     }
 
     userRef.set(teamData);

@@ -13,11 +13,13 @@ interface User {
   displayName?: string;
   userPreferences?: any;
   flatPreferences?: any;
+  teamUid?: any; // store teamUid user belongs to for now here
 }
 
 interface Team {
   teamLeader: User;
   teamMember: User;
+  teamUid: string;
 }
 
 @Component({
@@ -60,17 +62,19 @@ export class UserTeamsComponent implements OnInit {
 
     // subscribe to observable and get teams that current user belongs to
     this.observableTeams.subscribe((teams: Team[]) => {
-      debugger;
-
       // this is clumsy code which looks at each team and if user logged in exists in that
       // team then look at the other user in the team and store their details
       for (let i = 0; i < teams.length; i++) {
         if(teams[i].teamLeader.uid == this.loggedInUserID || teams[i].teamMember.uid == this.loggedInUserID) {
           if(teams[i].teamLeader.uid != this.loggedInUserID) {
             users[i] = teams[i].teamLeader;
+            // store teamUid user belongs to
+            users[i].teamUid = teams[i].teamUid;
           }
           else {
             users[i] = teams[i].teamMember;
+            // store teamUid user belongs to
+            users[i].teamUid = teams[i].teamUid;
           }
         }
       }
