@@ -1,9 +1,11 @@
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxSoapModule } from 'ngx-soap';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AuthService } from './core/auth.service';
+import { DaftService } from './core/daft.service';
 import { AppRoutingModule } from './app-routing.module';
 
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -52,6 +54,7 @@ export const firebaseConfig = environment.firebaseConfig;
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSoapModule,
     CoreModule,
     AngularFireModule.initializeApp(firebaseConfig),
     MDBBootstrapModule.forRoot(),

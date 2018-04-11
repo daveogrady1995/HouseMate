@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -20,6 +20,12 @@ interface User {
 export class AuthService {
 
   user: Observable<User | null>;
+
+  // variables to hold user if they already exist in database
+  private observableExistingUser: Observable<User[]>
+  private existingUserCollection: AngularFirestoreCollection<User>;
+  public existingUser: User;
+
   public globalVariable = "this is global";
 
   constructor(private afAuth: AngularFireAuth,
@@ -34,7 +40,6 @@ export class AuthService {
           return Observable.of(null)
         }
       })
-
   }
 
   ////// OAuth Methods /////
@@ -121,14 +126,32 @@ export class AuthService {
   private updateUserData(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
-    const data: User = {
-      uid: user.uid,
-      email: user.email || null,
-      displayName: user.displayName || 'nameless user',
-      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
-    }
+    // retrieve current user object based on user id
+    this.existingUserCollection = this.afs.collection('users', ref => {
+      return ref.where('uid', '==', user.uid)
+    });
+    this.observableExistingUser = this.existingUserCollection.valueChanges();
 
-    return userRef.set(data)
+    // subscribe to observable and check if user exists already
+    this.observableExistingUser.subscribe((existUser: User[]) => {
+      this.existingUser = existUser[0];
 
+      const data: User = {
+        uid: user.uid,
+        email: user.email || null,
+        displayName: user.displayName || 'nameless user',
+        photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
+      }
+  
+      // if user exists already just do an update
+      // otherwise create a new document
+      if(this.existingUser) {
+        return userRef.update(data)
+      }
+      else {
+        return userRef.set(data)
+      }
+    });
   }
+  
 }

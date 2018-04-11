@@ -27,9 +27,5 @@ export class AppComponent {
     // init toaster notification
     this.toastr.setRootViewContainerRef(vcr);
   }
-
-  logout() {
-    this.auth.signOut();
-  }
   
 }

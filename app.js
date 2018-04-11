@@ -2,10 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
+const cors = require('cors');
 const app = express();
 
 // API file for interacting with MongoDB
 const api = require('./server/routes/api');
+
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+});
 
 // Parsers
 app.use(bodyParser.json());

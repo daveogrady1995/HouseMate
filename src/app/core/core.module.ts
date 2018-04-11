@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { AuthService } from './auth.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { DaftService } from './daft.service'
 
 @NgModule({
   imports: [
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  providers: [AuthService]
+  providers: [AuthService, DaftService]
 })
 export class CoreModule { }

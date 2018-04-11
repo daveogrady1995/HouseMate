@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { AuthService } from "../core/auth.service";
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -55,7 +54,6 @@ export class UserPreferencesComponent implements OnInit {
   
 
   constructor(private afs: AngularFirestore,
-    private auth: AuthService,
     private afAuth: AngularFireAuth,
     public toastr: ToastsManager,
     private router: Router) { 

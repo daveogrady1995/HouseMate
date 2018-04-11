@@ -1,25 +1,73 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../core/auth.service";
+import { DaftService } from "../core/daft.service";
 import { Router } from "@angular/router";
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
+
+interface User {
+  uid: string;
+  email?: string;
+  photoURL?: string;
+  displayName?: string;
+  userPreferences?: any;
+  flatPreferences?: any;
+}
 
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent {
+export class UserLoginComponent implements OnInit  {
 
+  properties: any = [];
   private userID;
 
-  constructor(public auth: AuthService, private router: Router) { 
+  private currentUserID: string;
+  private userCollection: AngularFirestoreCollection<User>;
+  private observableUsers: Observable<User[]>;
+
+  constructor(public auth: AuthService, private router: Router, 
+    private daft: DaftService, private http: Http, 
+    private afAuth: AngularFireAuth, private afs: AngularFirestore) { 
+
+      //this.http.get("api/test").map(res => this.testData = res);
+      //console.log(this.testData);
   }
 
+  ngOnInit() {
+    this.daft.getData().subscribe(prop => {
+      this.properties = prop;
+      console.log(this.properties);
+    });
+  }
 
   private afterSignIn(): void {
-    // Do after login stuff here, such router redirects, toast messages, etc.
-    this.router.navigate(['/preferences']);
+    // get uid of current user logged in
+    this.afAuth.authState.subscribe((user: User) => {
+      this.currentUserID = user.uid
+
+      // retrieve current user object based on user id
+      this.userCollection = this.afs.collection('users', ref => {
+        return ref.where('uid', '==', this.currentUserID)
+      });
+      this.observableUsers = this.userCollection.valueChanges();
+      // subscribe to observable and retrieve users
+      this.observableUsers.subscribe((users: User[]) => {
+        debugger;
+        // If user has already filled out preferences then go to browse screen
+        if (users[0].flatPreferences != null && users[0].userPreferences != null) {
+          this.router.navigate(['/browse-housemates']);
+        }
+        else {
+          this.router.navigate(['/preferences']);
+        }
+      });
+    });
   }
 
   signInWithGoogle(): void {
