@@ -31,6 +31,7 @@ import { environment } from '../environments/environment';
 import { UserRequestsComponent } from './user-requests/user-requests.component';
 import { UserTeamsComponent } from './user-teams/user-teams.component';
 import { TeamMessagesComponent } from './team-messages/team-messages.component';
+import { BrowseFlatsComponent } from './browse-flats/browse-flats.component';
 
 
 export const firebaseConfig = environment.firebaseConfig;
@@ -47,6 +48,7 @@ export const firebaseConfig = environment.firebaseConfig;
     UserRequestsComponent,
     UserTeamsComponent,
     TeamMessagesComponent,
+    BrowseFlatsComponent,
   ],
   imports: [
     BrowserAnimationsModule,

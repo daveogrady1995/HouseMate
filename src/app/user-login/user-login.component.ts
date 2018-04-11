@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../core/auth.service";
-import { DaftService } from "../core/daft.service";
 import { Router } from "@angular/router";
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -32,18 +31,14 @@ export class UserLoginComponent implements OnInit  {
   private observableUsers: Observable<User[]>;
 
   constructor(public auth: AuthService, private router: Router, 
-    private daft: DaftService, private http: Http, 
-    private afAuth: AngularFireAuth, private afs: AngularFirestore) { 
+    private http: Http, private afAuth: AngularFireAuth, private afs: AngularFirestore) { 
 
       //this.http.get("api/test").map(res => this.testData = res);
       //console.log(this.testData);
   }
 
   ngOnInit() {
-    this.daft.getData().subscribe(prop => {
-      this.properties = prop;
-      console.log(this.properties);
-    });
+    
   }
 
   private afterSignIn(): void {

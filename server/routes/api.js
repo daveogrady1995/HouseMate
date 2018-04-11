@@ -10,7 +10,7 @@ var soap = require('soap');
 var apiWSDL = 'https://api.daft.ie/v2/wsdl.xml';
 
 var args = {
-     'api_key': '67c7bc238dce710e9c3f3f4a8e301d30bc46cf30',
+     //'api_key': '67c7bc238dce710e9c3f3f4a8e301d30bc46cf30',
      //query: { "bedrooms": 4, "perpage":60},
 }
 
@@ -63,7 +63,7 @@ let response = {
 router.get('/test', (req, res) => {
     soap.createClient(apiWSDL, function(err, client) {
         console.log(client);
-        client.DaftAPIService.DaftAPIService.search_rental(args, function(err, result) {
+        client.DaftAPIService.DaftAPIService.search_sale(args, function(err, result) {
         //client.search_sale(args,function(err, result) {
             console.log(result);
             response.data = result;

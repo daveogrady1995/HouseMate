@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <app-navigation></app-navigation>
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let flat of properties">
+        <div class="col">
+          <div class="card" style="margin-bottom: 10%">
+            <img class="card-img-top" [src]="flat.large_thumbnail_url"/>
+            <div class="card-body text-center">
+              <h4 class="card-title">{{flat.area}}</h4>
+              <p>{{flat.county}}</p>
+              <p style="font-weight:bold">€{{flat.price}} per month</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
