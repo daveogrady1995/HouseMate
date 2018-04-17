@@ -1,0 +1,52 @@
+<div class="wrapper">
+  <app-navigation></app-navigation>
+  <div class="container">
+      <div class="row justify-content-md-center">
+          <div *ngIf="selectedFlat">
+              <div class="col-md-auto">
+                  <div class="card">
+                      <div class="card-body text-center">
+                          <img class="card-img-top rounded" [src]="selectedFlat.large_thumbnail_url">
+                          <h3 style="margin-top:4px;font-size:1.7em;">{{ selectedFlat.area }}</h3>
+                          <hr>
+                          <div class="form-row" style="margin-top:10px">
+                              <div class="form-group col-md-3">
+                                  <label class="prefLabel">County</label>
+                                  <p>{{ selectedFlat.county }}</p>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <label class="prefLabel">Price</label>
+                                  <p>€{{ selectedFlat.price }} per month</p>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <label class="prefLabel">Description</label>
+                                  <p class="description">{{ selectedFlat.description }}</p>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <label class="prefLabel">Contact</label>
+                                  <p>{{ selectedFlat.phone1 }}</p>
+                              </div>
+                          </div>
+                          <hr>
+                          <div *ngIf="teamUpRequestSent; then requestSentBtn else requestBtn">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<ng-template #requestBtn>
+  <button (click)="teamUpWithUser()" type="button" class="btn btn-secondary waves-light" mdbRippleRadius>
+      <i class="fa fa-share-alt" style="margin-right:10px"></i>Share to Chat</button>
+</ng-template>
+
+<ng-template #requestSentBtn>
+      <button type="button" class="btn btn-secondary waves-light" mdbRippleRadius>
+          <i class="fa fa-check" style="margin-right:10px"></i>Share sent</button>
+</ng-template>
+
+  
+

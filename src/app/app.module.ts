@@ -32,6 +32,7 @@ import { UserRequestsComponent } from './user-requests/user-requests.component';
 import { UserTeamsComponent } from './user-teams/user-teams.component';
 import { TeamMessagesComponent } from './team-messages/team-messages.component';
 import { BrowseFlatsComponent } from './browse-flats/browse-flats.component';
+import { FlatDetailsComponent } from './flat-details/flat-details.component';
 
 
 export const firebaseConfig = environment.firebaseConfig;
@@ -49,6 +50,7 @@ export const firebaseConfig = environment.firebaseConfig;
     UserTeamsComponent,
     TeamMessagesComponent,
     BrowseFlatsComponent,
+    FlatDetailsComponent,
   ],
   imports: [
     BrowserAnimationsModule,

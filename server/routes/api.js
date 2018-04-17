@@ -60,7 +60,7 @@ let response = {
     });
 });*/
 
-router.get('/test', (req, res) => {
+router.get('/flats', (req, res) => {
     soap.createClient(apiWSDL, function(err, client) {
         console.log(client);
         client.DaftAPIService.DaftAPIService.search_sale(args, function(err, result) {

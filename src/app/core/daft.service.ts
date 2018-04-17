@@ -28,7 +28,7 @@ export class DaftService {
   }
 
   getData() {
-    return this.http.get("api/test")
+    return this.http.get("api/flats")
       .map(result => result.json());
   }
 

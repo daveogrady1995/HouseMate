@@ -1,0 +1,13 @@
+.card-img-top {
+    height: 200px;
+    width: 300px;
+}
+
+.prefLabel {
+    font-weight: bold;
+    color: #3c7ee8;
+}
+
+.description {
+    text-overflow: ellipsis;
+}

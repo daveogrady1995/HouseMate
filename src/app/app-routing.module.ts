@@ -10,6 +10,7 @@ import { UserRequestsComponent } from './user-requests/user-requests.component';
 import { UserTeamsComponent } from './user-teams/user-teams.component';
 import { TeamMessagesComponent } from './team-messages/team-messages.component';
 import { BrowseFlatsComponent } from './browse-flats/browse-flats.component';
+import { FlatDetailsComponent } from './flat-details/flat-details.component';
 
 import { AuthGuard } from './core/auth.guard';
 import { CoreModule } from './core/core.module';
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'requests', component: UserRequestsComponent, canActivate: [AuthGuard] },
   { path: 'teams', component: UserTeamsComponent, canActivate: [AuthGuard] },
   { path: 'messages/:teamUid', component: TeamMessagesComponent, canActivate: [AuthGuard] },
-  { path: 'browse-flats', component: BrowseFlatsComponent, canActivate: [AuthGuard] }
+  { path: 'browse-flats', component: BrowseFlatsComponent, canActivate: [AuthGuard] },
+  { path: 'flat-details/:flatUid', component: FlatDetailsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
