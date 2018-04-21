@@ -15,7 +15,7 @@ interface TeamUpRequest {
 interface Team {
   teamLeader: User;
   teamMember: User;
-  teamUId: string;
+  teamUid: string;
 }
 
 interface User {
@@ -92,9 +92,9 @@ export class UserRequestsComponent implements OnInit {
     const teamData: Team = {
       teamLeader: teamRequest.requester,
       teamMember: teamRequest.recepient,
-      teamUId: docUid
+      teamUid: docUid
     }
-
+    debugger;
     userRef.set(teamData);
 
     this.toastr.success('You have accepted this team request', 'Accepted!');

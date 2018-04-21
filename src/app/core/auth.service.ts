@@ -143,10 +143,10 @@ export class AuthService {
         photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
       }
   
-      // if user exists already just do an update
+      // if user exists already don't do anything
       // otherwise create a new document
       if(this.existingUser) {
-        return userRef.update(data)
+        return
       }
       else {
         return userRef.set(data)

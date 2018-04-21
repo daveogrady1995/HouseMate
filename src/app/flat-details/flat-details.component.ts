@@ -26,7 +26,11 @@ export class FlatDetailsComponent implements OnInit {
   properties: Flat[];
 
   selectedFlatID: number;
+  teamUid: string;
+
   selectedFlat: Flat;
+
+  private shareFlatSent: boolean = false;
 
   private flatCollection: AngularFirestoreCollection<Flat>;
   private observableFlats: Observable<Flat[]>;
@@ -38,6 +42,7 @@ export class FlatDetailsComponent implements OnInit {
     // get flat uid from passed parameters passed in
     this.route.params.subscribe((params: Params) => {
       this.selectedFlatID = params['flatUid'];
+      this.teamUid = params['teamUid'];
     });
 
     this.flatCollection = this.afs.collection('flats');
@@ -55,4 +60,5 @@ export class FlatDetailsComponent implements OnInit {
       });
     });
   }
+
 }

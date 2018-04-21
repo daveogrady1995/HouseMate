@@ -11,11 +11,15 @@
               <div *ngFor="let message of team.messages">
                 <div *ngIf="message.sentByUser.uid == loggedInUserID" class="messageContainer darker">
                   <img [src]="message.sentByUser.photoURL" alt="Avatar" class="right" style="width:100%;">
-                  <p>{{message.content}}</p>
+                  <!-- some messages may contain a shared flat -->
+                  <a *ngIf="message.sharedFlat" [routerLink]="['/flat-details', teamUId,  message.sharedFlat.uid]" routerLinkActive="active"><img alt="Flat" [src]="message.sharedFlat.large_thumbnail_url"></a>
+                  <p style="color:white;">{{message.content}}</p>
                   <span class="time-left">11:01</span>
                 </div>
                 <div *ngIf="message.sentByUser.uid != loggedInUserID" class="messageContainer">
-                  <img [src]="message.sentByUser.photoURL" alt="Avatar" style="width:100%;">
+                  <img [src]="message.sentByUser.photoURL" alt="Avatar" class="left" style="width:100%;">
+                  <!-- some messages may contain a shared flat -->
+                  <a *ngIf="message.sharedFlat" [routerLink]="['/flat-details', teamUId, message.sharedFlat.uid]" routerLinkActive="active"><img alt="Flat" [src]="message.sharedFlat.large_thumbnail_url"></a>
                   <p>{{message.content}}</p>
                   <span class="time-right">11:00</span>
                 </div>
@@ -26,7 +30,10 @@
               <div class="row">
                 <div class="col-md-9" style="align-self:center;">
                   <div class="md-form" style="padding-left:15px;">
-                    <input placeholder="Type your message here" [(ngModel)]="messageContent" name="message" type="text" id="form76" class="md-textarea"/>
+                      <div class="fake-input">
+                        <img *ngIf="sharedFlat" [src]="sharedFlat.large_thumbnail_url" width=100 height=80 style="margin-top:10px" />  
+                        <input placeholder="Type your message here" [(ngModel)]="messageContent" name="message" type="text" id="form76" class="md-textarea"/>             
+                      </div>
                   </div>
                 </div>
                 <div class="col-md-3">

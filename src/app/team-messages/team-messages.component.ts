@@ -6,6 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Params } from '@angular/router/src/shared';
+import 'rxjs/add/operator/switchMap';
 
 interface User {
   uid: string;
@@ -25,8 +26,19 @@ interface Team {
 
 interface Message {
   content: string;
+  sharedFlat?: Flat;
   sentByUser: User;
   sentToUser: User;
+}
+
+interface Flat {
+  uid: number;
+  area: string;
+  county: string;
+  large_thumbnail_url: string;
+  price: number;
+  description: string;
+  phone1: string;
 }
 
 @Component({
@@ -47,8 +59,15 @@ export class TeamMessagesComponent implements OnInit {
   userCollection: AngularFirestoreCollection<User>;
   observableUser: Observable<User[]>;
 
+  private flatCollection: AngularFirestoreCollection<Flat>;
+  private observableFlats: Observable<Flat[]>;
+
   private loggedInUserID: string;
   private loggedInUser: User;
+
+  properties: Flat[];
+  sharedFlatUid: number;
+  sharedFlat: Flat = null;
 
   constructor(private route: ActivatedRoute, 
     private afs: AngularFirestore,
@@ -59,6 +78,15 @@ export class TeamMessagesComponent implements OnInit {
     // retrieve team messages for current user based on teamUid
     this.route.params.subscribe((params: Params) => {
       this.teamUId = params['teamUid'];
+
+      // check if user came here from flat details to share flat
+      if(params['flatUid'] != null) {
+        this.sharedFlatUid = params['flatUid'];
+        // retrieve flat from db and put it in textbox
+        this.retrieveSharedFlat();
+      }
+
+
     });
 
     // get the logged in user id
@@ -86,11 +114,11 @@ export class TeamMessagesComponent implements OnInit {
     // subscribe to observable and get teams that current user belongs to
     this.observableTeam.subscribe((teams: Team[]) => {
       this.team = teams[0];
-      debugger;
     });
   }
 
   submitMessage() {
+
     if (this.messageContent != null) {
 
       const teamsRef = this.afs.doc(`teams/${this.teamUId}`);
@@ -107,6 +135,7 @@ export class TeamMessagesComponent implements OnInit {
 
       const teamMessage: Message = {
         content: this.messageContent,
+        sharedFlat: this.sharedFlat,
         sentByUser: this.loggedInUser,
         sentToUser: otherUser
       }
@@ -120,11 +149,35 @@ export class TeamMessagesComponent implements OnInit {
         this.team.messages.push(teamMessage);
       }
 
-      debugger;
       // update team with new messages
       teamsRef.update(this.team);
 
+      // clear shared image if it exists
+      if(this.sharedFlat != null) {
+        this.sharedFlat = null;
+      }
+
+      this.messageContent = null;
+
     }
+
+  }
+
+  retrieveSharedFlat() {
+    this.flatCollection = this.afs.collection('flats');
+    this.observableFlats = this.flatCollection.valueChanges(); // observable of flat data 
+
+    // subscribe to observable and retrieve flats
+    this.observableFlats.subscribe((flats: any[]) => {
+      this.properties = flats[0].properties;
+
+      // find selected using uid
+      this.properties.forEach(flat => {
+        if(flat.uid == this.sharedFlatUid) {
+          this.sharedFlat = flat;
+        }
+      });
+    });
 
   }
 

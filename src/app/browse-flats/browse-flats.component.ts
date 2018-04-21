@@ -3,6 +3,8 @@ import { DaftService } from "../core/daft.service";
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import { Params } from '@angular/router/src/shared';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 interface Flat {
   uid: number;
@@ -20,15 +22,25 @@ interface Flat {
 })
 export class BrowseFlatsComponent implements OnInit {
 
+  teamUid: string;
+
   properties: Flat[] = [];
   idCount = 1;
 
   private flatCollection: AngularFirestoreCollection<Flat>;
   private observableFlats: Observable<Flat[]>;
 
-  constructor(private daft: DaftService, private afs: AngularFirestore) { }
+  constructor(private daft: DaftService, private afs: AngularFirestore
+  ,private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    // retrieve flats for current teamUid
+    this.route.params.subscribe((params: Params) => {
+      debugger;
+      this.teamUid = params['teamUid'];
+    });
+
     // first lets check if we have already have flats in the database
     // if not populate new ones using Daft API
 

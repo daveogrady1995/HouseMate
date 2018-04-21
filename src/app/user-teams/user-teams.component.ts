@@ -56,6 +56,7 @@ export class UserTeamsComponent implements OnInit {
 
   getUserTeams() {
     let users: User[] = [];
+    let userTeams: User[] = [];
 
     this.teamsCollection = this.afs.collection('teams');
     this.observableTeams = this.teamsCollection.valueChanges();
@@ -79,8 +80,15 @@ export class UserTeamsComponent implements OnInit {
         }
       }
 
-      this.userTeams = users;
-      this.teamsCount = users.length;
+      users.forEach(user => {
+        if(user != null) {
+          userTeams.push(user);
+        }
+      });
+
+      debugger;
+      this.userTeams = userTeams;
+      this.teamsCount = this.userTeams.length;
     });
   }
 }

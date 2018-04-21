@@ -28,7 +28,7 @@
                               </div>
                           </div>
                           <hr>
-                          <div *ngIf="teamUpRequestSent; then requestSentBtn else requestBtn">
+                          <div *ngIf="shareFlatSent; then shareFlatSentBtn else shareFlatBtn">
                           </div>
                       </div>
                   </div>
@@ -38,14 +38,14 @@
   </div>
 </div>
 
-<ng-template #requestBtn>
-  <button (click)="teamUpWithUser()" type="button" class="btn btn-secondary waves-light" mdbRippleRadius>
-      <i class="fa fa-share-alt" style="margin-right:10px"></i>Share to Chat</button>
+<ng-template #shareFlatBtn>
+  <a [routerLink]="['/messages', teamUid, selectedFlatID]" routerLinkActive="active" class="btn btn-secondary waves-light" mdbRippleRadius>
+      <i class="fa fa-share-alt" style="margin-right:10px"></i>Share to Chat</a>
 </ng-template>
 
-<ng-template #requestSentBtn>
-      <button type="button" class="btn btn-secondary waves-light" mdbRippleRadius>
-          <i class="fa fa-check" style="margin-right:10px"></i>Share sent</button>
+<ng-template #shareFlatSentBtn>
+    <a [routerLink]="['/messages', teamUid, selectedFlatID]" routerLinkActive="active" class="btn btn-secondary waves-light" mdbRippleRadius>
+        <i class="fa fa-share-alt" style="margin-right:10px"></i>Share to Chat</a>
 </ng-template>
 
   

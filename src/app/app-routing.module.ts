@@ -25,8 +25,9 @@ const routes: Routes = [
   { path: 'requests', component: UserRequestsComponent, canActivate: [AuthGuard] },
   { path: 'teams', component: UserTeamsComponent, canActivate: [AuthGuard] },
   { path: 'messages/:teamUid', component: TeamMessagesComponent, canActivate: [AuthGuard] },
-  { path: 'browse-flats', component: BrowseFlatsComponent, canActivate: [AuthGuard] },
-  { path: 'flat-details/:flatUid', component: FlatDetailsComponent, canActivate: [AuthGuard] }
+  { path: 'messages/:teamUid/:flatUid', component: TeamMessagesComponent, canActivate: [AuthGuard] },
+  { path: 'browse-flats/:teamUid', component: BrowseFlatsComponent, canActivate: [AuthGuard] },
+  { path: 'flat-details/:teamUid/:flatUid', component: FlatDetailsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
