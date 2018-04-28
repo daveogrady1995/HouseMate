@@ -26,6 +26,7 @@ interface Team {
 
 interface Message {
   content: string;
+  time?: string;
   sharedFlat?: Flat;
   sentByUser: User;
   sentToUser: User;
@@ -121,6 +122,9 @@ export class TeamMessagesComponent implements OnInit {
 
     if (this.messageContent != null) {
 
+      // get current time
+      let currentTime = this.getCurrentTime();
+
       const teamsRef = this.afs.doc(`teams/${this.teamUId}`);
 
       let otherUser: User = null;
@@ -135,6 +139,7 @@ export class TeamMessagesComponent implements OnInit {
 
       const teamMessage: Message = {
         content: this.messageContent,
+        time: currentTime,
         sharedFlat: this.sharedFlat,
         sentByUser: this.loggedInUser,
         sentToUser: otherUser
@@ -179,6 +184,21 @@ export class TeamMessagesComponent implements OnInit {
       });
     });
 
+  }
+
+  addZero(i) {
+    if (i < 10) {
+      i = "0" + i;
+    }
+    return i;
+  }
+
+  getCurrentTime(): string {
+    var d = new Date();
+    var x = document.getElementById("demo");
+    var h = this.addZero(d.getHours());
+    var m = this.addZero(d.getMinutes());
+    return h + ":" + m;
   }
 
 }

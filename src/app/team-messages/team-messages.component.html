@@ -14,14 +14,14 @@
                   <!-- some messages may contain a shared flat -->
                   <a *ngIf="message.sharedFlat" [routerLink]="['/flat-details', teamUId,  message.sharedFlat.uid]" routerLinkActive="active"><img alt="Flat" [src]="message.sharedFlat.large_thumbnail_url"></a>
                   <p style="color:white;">{{message.content}}</p>
-                  <span class="time-left">11:01</span>
+                  <span class="time-left">{{message.time}}</span>
                 </div>
                 <div *ngIf="message.sentByUser.uid != loggedInUserID" class="messageContainer">
                   <img [src]="message.sentByUser.photoURL" alt="Avatar" class="left" style="width:100%;">
                   <!-- some messages may contain a shared flat -->
                   <a *ngIf="message.sharedFlat" [routerLink]="['/flat-details', teamUId, message.sharedFlat.uid]" routerLinkActive="active"><img alt="Flat" [src]="message.sharedFlat.large_thumbnail_url"></a>
                   <p>{{message.content}}</p>
-                  <span class="time-right">11:00</span>
+                  <span class="time-right">{{message.time}}</span>
                 </div>
               </div>
             </div>
