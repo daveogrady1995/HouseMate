@@ -53,9 +53,12 @@ export class UserLoginComponent implements OnInit  {
       this.observableUsers = this.userCollection.valueChanges();
       // subscribe to observable and retrieve users
       this.observableUsers.subscribe((users: User[]) => {
-        debugger;
+        // has no details and new to app
+        if(users[0] == null) {
+          this.router.navigate(['/preferences']);
+        }
         // If user has already filled out preferences then go to browse screen
-        if (users[0].flatPreferences != null && users[0].userPreferences != null) {
+        else if (users[0].flatPreferences != null && users[0].userPreferences != null) {
           this.router.navigate(['/browse-housemates']);
         }
         else {

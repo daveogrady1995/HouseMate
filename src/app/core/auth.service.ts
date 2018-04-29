@@ -13,6 +13,8 @@ interface User {
   email?: string;
   photoURL?: string;
   displayName?: string;
+  userPreferences?: any;
+  flatPreferences?: any;
 }
 
 
@@ -140,7 +142,7 @@ export class AuthService {
         uid: user.uid,
         email: user.email || null,
         displayName: user.displayName || 'nameless user',
-        photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
+        photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ',
       }
   
       // if user exists already don't do anything
@@ -149,7 +151,8 @@ export class AuthService {
         return
       }
       else {
-        return userRef.set(data)
+        userRef.set(data);
+        return
       }
     });
   }
